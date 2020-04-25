@@ -1,6 +1,11 @@
 #include <iostream>
+#include "stdafx.h"
+#include "util.h"
+
+
+
 
 int main()
 {
-	std::cout << "helloworld" << std::endl;
+	return 0;
 }
