@@ -8,12 +8,8 @@ using namespace std;
 
 int main()
 {
-	obito::table::Column c1("testcolumn",3,4);
-	std::string tmp = c1.toString();
-	cout << tmp << endl;
-	obito::table::Column c2(tmp);
-	cout << c2.columnName << endl;
-	cout << c2.valueType << endl;
-	cout << c2.size << endl;
+	obito::table::Value v1("lubenweiniubi",3);
+	std::string tmp = v1.toString();
+	std::string output=obito::file::readStringFromFile("test.dat", tmp.size(),20 );
 	return 0;
 }

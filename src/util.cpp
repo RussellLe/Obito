@@ -28,6 +28,20 @@ namespace obito {
             inFile.close();
             return true;
         }
+
+        bool writeStringToFile(std::string fileName, std::string writeStr, int offset)
+        {
+            return writeToFile(fileName, writeStr.c_str(), writeStr.size(), offset);
+        }
+
+        std::string readStringFromFile(std::string fileName, int valueSize, int offset)
+        {
+            char* buffer = (char*)malloc(valueSize * sizeof(char));
+            readFromFile(fileName, buffer, valueSize, offset);
+            std::string output = buffer;
+            free(buffer);
+            return output;
+        }
     }
 }
 

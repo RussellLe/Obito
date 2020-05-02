@@ -10,6 +10,10 @@ namespace obito {
         bool writeToFile(std::string fileName, const char* value, int valueSize, int offset);
 
         bool readFromFile(std::string fileName, char* readBuffer, int valueSize, int offset);
+
+        bool writeStringToFile(std::string fileName, std::string writeStr, int offset);
+
+        std::string readStringFromFile(std::string fileName, int valueSize, int offset);
     }
 }
 
