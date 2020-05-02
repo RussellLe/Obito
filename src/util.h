@@ -12,3 +12,15 @@ namespace obito {
         bool readFromFile(std::string fileName, char* readBuffer, int valueSize, int offset);
     }
 }
+
+namespace obito
+{
+    namespace common
+    {
+        std::string generateTableFileName(std::string tableName);
+
+        std::string generateDataFileName(std::string tableName);
+
+        std::vector<std::string> splitStr(std::string originStr, char token);
+    }
+}

@@ -30,3 +30,37 @@ namespace obito {
         }
     }
 }
+
+namespace obito
+{
+    namespace common
+    {
+        std::string generateTableFileName(std::string tableName)
+        {
+            return tableName + "TableInfo.dat";
+        }
+
+        std::string generateDataFileName(std::string tableName)
+        {
+            return tableName + "Data.dat";
+        }
+
+        std::vector<std::string> splitStr(std::string originStr, char token)
+        {
+            std::vector<std::string> output;
+            std::string tmp="";
+            for (int i = 0; i < originStr.size(); i++)
+            {
+                if (originStr[i] == token)
+                {
+                    output.push_back(tmp);
+                    tmp = "";
+                    continue;
+                }
+                tmp += originStr[i];
+            }
+            output.push_back(tmp);
+            return output;
+        }
+    }
+}
