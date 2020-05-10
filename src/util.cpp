@@ -11,6 +11,16 @@ namespace obito {
             return true;
         }
 
+        bool deleteFile(std::string fileName)
+        {
+            bool flag = remove(fileName.c_str());
+            if (flag)
+            {
+                return false;
+            }
+            return true;
+        }
+
         bool writeToFile(std::string fileName, const char* value, int valueSize, int offset)
         {
             std::ofstream outFile(fileName, std::ios::out | std::ios::binary | std::ios::in);
@@ -41,6 +51,21 @@ namespace obito {
             std::string output = buffer;
             free(buffer);
             return output;
+        }
+
+        std::string readAllStringFromFile(std::string fileName)
+        {
+            std::ifstream in(fileName);
+            std::ostringstream tmp;
+            tmp << in.rdbuf();
+            std::string str = tmp.str();
+            return str;
+        }
+
+        bool isFileExist(std::string fileName)
+        {
+            std::ifstream f(fileName.c_str());
+            return f.good();
         }
     }
 }

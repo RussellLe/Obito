@@ -8,6 +8,9 @@
     <Filter Include="src">
       <UniqueIdentifier>{f9ae29c6-2d72-4a48-a172-1e4956c54ed8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\index">
+      <UniqueIdentifier>{e007d8b6-560a-4070-8c33-68068dbd769e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitignore">
@@ -27,6 +30,9 @@
     <ClCompile Include="..\src\util.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\index\memory_rbtree.cpp">
+      <Filter>src\index</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\stdafx.h">
@@ -37,6 +43,12 @@
     </ClInclude>
     <ClInclude Include="..\src\util.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\index\i_index.h">
+      <Filter>src\index</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\index\memory_rbtree.h">
+      <Filter>src\index</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

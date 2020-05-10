@@ -22,12 +22,15 @@
     <None Include="..\.gitignore" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\index\memory_rbtree.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\stdafx.cpp" />
     <ClCompile Include="..\src\table.cpp" />
     <ClCompile Include="..\src\util.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\src\index\i_index.h" />
+    <ClInclude Include="..\src\index\memory_rbtree.h" />
     <ClInclude Include="..\src\stdafx.h" />
     <ClInclude Include="..\src\table.h" />
     <ClInclude Include="..\src\util.h" />

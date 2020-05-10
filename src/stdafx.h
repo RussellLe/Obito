@@ -5,6 +5,7 @@
 #include <Windows.h>
 #include <vector>
 #include <sstream>
+#include <map>
 
 #define _CRT_SECURE_NO_WARNINGS
 
