@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\btree.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\stdafx.cpp" />
     <ClCompile Include="..\src\table.cpp" />
@@ -28,6 +29,7 @@
     <None Include="..\.gitignore" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\src\btree.h" />
     <ClInclude Include="..\src\stdafx.h" />
     <ClInclude Include="..\src\table.h" />
     <ClInclude Include="..\src\util.h" />
