@@ -30,6 +30,16 @@ namespace obito {
 			std::string toString();
 		};
 
+		class ValueRow
+		{
+		public:
+			int id;
+			std::vector<Value> valueContainer;
+			ValueRow(int theId, std::vector<Value> theValueContainer);
+			ValueRow(std::string initStr);
+			std::string toString();
+		};
+
 		class Table
 		{
 		public:

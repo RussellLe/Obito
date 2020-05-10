@@ -44,6 +44,33 @@ namespace obito {
 			return output;
 		}
 
+		ValueRow::ValueRow(int theId, std::vector<Value> theValueContainer)
+		{
+			id = theId;
+			valueContainer = theValueContainer;
+		}
+
+		ValueRow::ValueRow(std::string initStr)
+		{
+			std::vector<std::string> output = obito::common::splitStr(initStr, '&');
+			id = atoi(output[0].c_str());
+			for (int i = 1; i < output.size(); i++)
+			{
+				valueContainer.push_back(Value(output[i]));
+			}
+		}
+
+		std::string ValueRow::toString()
+		{
+			std::string output = std::to_string(id);
+			for (auto it = valueContainer.begin(); it < valueContainer.end(); it++)
+			{
+				output += "&";
+				output += it->toString();
+			}
+			return output;
+		}
+
 		Table::Table(std::string tableName, std::vector<Column> columns)
 		{
 			columnVec_ = columns;
