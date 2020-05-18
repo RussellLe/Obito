@@ -49,7 +49,22 @@ namespace obito {
             char* buffer = (char*)malloc(valueSize * sizeof(char));
             readFromFile(fileName, buffer, valueSize, offset);
             std::string output = buffer;
-            free(buffer);
+            return output;
+        }
+
+        char* readAllBinaryFromFile(std::string fileName)
+        {
+            std::ifstream in(fileName);
+            std::ostringstream tmp;
+            tmp << in.rdbuf();
+            std::string str = tmp.str();
+
+            char* output = (char*)malloc(str.length());
+            for (int i = 0; i < str.length(); i++)
+            {
+                output[i] = str[i];
+            }
+
             return output;
         }
 
@@ -60,6 +75,16 @@ namespace obito {
             tmp << in.rdbuf();
             std::string str = tmp.str();
             return str;
+        }
+
+        char* turnStdStringToBinary(std::string originStr)
+        {
+            char* output = (char*)malloc(originStr.length());
+            for (int i = 0; i < originStr.length(); i++)
+            {
+                output[i] = originStr[i];
+            }
+            return output;
         }
 
         bool isFileExist(std::string fileName)
@@ -74,14 +99,29 @@ namespace obito
 {
     namespace common
     {
-        std::string generateTableFileName(std::string tableName)
+        std::string generateTableInfoFileName(std::string tableName)
         {
             return tableName + "TableInfo.dat";
         }
 
-        std::string generateDataFileName(std::string tableName)
+        std::string generateTableDataFileName(std::string tableName)
         {
             return tableName + "Data.dat";
+        }
+
+        std::string generateColumnsFileName(std::string tableName)
+        {
+            return tableName + "Columns.dat";
+        }
+
+        std::string generateIndexFileName(std::string indexName)
+        {
+            return indexName + ".dat";
+        }
+
+        std::string generateIndexFragsFileName(std::string indexName)
+        {
+            return indexName + "Frags.dat";
         }
 
         std::vector<std::string> splitStr(std::string originStr, char token)

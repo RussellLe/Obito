@@ -113,7 +113,7 @@ namespace obito {
 					{
 						maxOffset = idOffsetUnit->offset;
 					}
-					delete idOffsetUnit;
+					//delete idOffsetUnit;
 				}
 				dataFileoffsetCursor_ = maxOffset;
 			}
@@ -128,7 +128,7 @@ namespace obito {
 				{
 					int* fragsPtr = obito::file::readObjectFromFile<int>(indexFragFileName_, offsetCursorTmp);
 					offsetFrags_.push_back(*fragsPtr);
-					delete fragsPtr;
+					//delete fragsPtr;
 				}
 			}
 

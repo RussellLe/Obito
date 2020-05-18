@@ -1,82 +1,158 @@
 #include "table.h"
 
+#include "datafield/integer_field.h"
+
 namespace obito {
 	namespace table
 	{
 
-		Column::Column(std::string theColumnName, _column_type_int theValueType, size_t theSize)
+		Value::Value(std::shared_ptr<IDataField> theValuePtr)
+		{
+			valuePtr = theValuePtr;
+			valueSize = theValuePtr->getValueSize();
+		}
+
+		Value::Value(DataFieldEnum dataFieldEnum, char* initStr)
+		{
+			switch (dataFieldEnum)
+			{
+			case obito::datafield::IntegerFieldEnum:
+				valuePtr = std::make_shared<obito::datafield::IntegerField>(initStr);
+				break;
+			default:
+				break;
+			}
+			valueSize = valuePtr->getValueSize();
+		}
+
+		void Value::printValue()
+		{
+			valuePtr->printValue();
+		}
+
+		Row::Row(std::shared_ptr<Table> belongTable, int theId, std::vector<Value> theValues)
+		{
+			belongTablePtr = belongTable;
+
+			id = theId;
+			values = theValues;
+			rowSize = 0;
+			for (auto iter = values.begin(); iter < values.end(); iter++)
+			{
+				rowSize += iter->valueSize;
+			}
+		}
+
+		Row::Row(std::shared_ptr<Table> belongTable, char* initStr)
+		{
+			belongTablePtr = belongTable;
+
+			memcpy(&id, initStr, sizeof(int));
+			memcpy(&rowSize, initStr + sizeof(int), sizeof(size_t));
+
+			int offsetCursor = sizeof(int) + sizeof(size_t);
+			int totalSize = rowSize + offsetCursor;
+
+			for (auto iter = belongTablePtr->columns.begin(); iter < belongTablePtr->columns.end(); iter++)
+			{
+				Value valueObj(iter->valueType, initStr + offsetCursor);
+				values.push_back(valueObj);
+				offsetCursor += valueObj.valuePtr->getValueSize();
+			}
+		}
+
+		void Row::printRow()
+		{
+			std::cout << id << ' ';
+			for (auto iter = values.begin(); iter < values.end(); iter++)
+			{
+				iter->printValue();
+				std::cout << ' ';
+			}
+			std::cout << std::endl;
+		}
+
+		char* Row::toBinary()
+		{
+			char* output = (char*)malloc(sizeof(id) + sizeof(rowSize) + rowSize);
+
+			char* idStr = reinterpret_cast<char*>(&id);
+			char* sizeStr =  reinterpret_cast<char*>(&rowSize);
+
+
+			memcpy(output, idStr, sizeof(id));
+			memcpy(output + sizeof(id), sizeStr, sizeof(rowSize));
+
+			int offsetCursor = sizeof(id) + sizeof(rowSize);
+			for (auto iter = values.begin(); iter < values.end(); iter++)
+			{
+				memcpy(output + offsetCursor, iter->valuePtr->toBinary(), iter->valuePtr->getValueSize());
+				offsetCursor += iter->valuePtr->getValueSize();
+			}
+			return output;
+		}
+
+		Column::Column(std::string theColumnName, DataFieldEnum theValueType)
 		{
 			columnName = theColumnName;
 			valueType = theValueType;
-			size = theSize;
 		}
 
-		Column::Column(std::string initStr)
+		Column::Column(char* initStr)
 		{
-			std::vector<std::string> output = obito::common::splitStr(initStr, '|');
-			columnName = output[0];
-			valueType = atoi(output[1].c_str());
-			size = atoi(output[2].c_str());
+			memcpy(this, initStr, sizeof(Column));
 		}
 
-		std::string Column::toString()
+		char* Column::toBinary()
 		{
-			std::string output = columnName + "|" + std::to_string(valueType) + "|" + std::to_string(size);
-			return output;
+			return reinterpret_cast<char*>(this);
 		}
 
-		Value::Value(std::string theValue, _column_type_int theValueType)
+		Table::Table(std::string theTableName)
 		{
-			value = theValue;
-			valueType = theValueType;
+			tableName = theTableName;
+			infoFileName_ = obito::common::generateTableInfoFileName(tableName);
+			dataFileName_ = obito::common::generateTableDataFileName(tableName);
+			columnsFileName_ = obito::common::generateColumnsFileName(tableName);
 		}
 
-		Value::Value(std::string initStr)
+		Table::Table(std::string theTableName, std::vector<Column> theColumns)
 		{
-			std::vector<std::string> output = obito::common::splitStr(initStr, '|');
-			value = output[0];
-			valueType = atoi(output[1].c_str());
+			tableName = theTableName;
+			infoFileName_ = obito::common::generateTableInfoFileName(tableName);
+			dataFileName_ = obito::common::generateTableDataFileName(tableName);
+			columnsFileName_ = obito::common::generateColumnsFileName(tableName);
+
 		}
 
-		std::string Value::toString()
+		void Table::addColumn(Column theColumn)
 		{
-			std::string output = value + "|" + std::to_string(valueType);
-			return output;
+			columns.push_back(theColumn);
 		}
 
-		ValueRow::ValueRow(int theId, std::vector<Value> theValueContainer)
+		void Table::syncColumnsToFile()
 		{
-			id = theId;
-			valueContainer = theValueContainer;
-		}
-
-		ValueRow::ValueRow(std::string initStr)
-		{
-			std::vector<std::string> output = obito::common::splitStr(initStr, '&');
-			id = atoi(output[0].c_str());
-			for (int i = 1; i < output.size(); i++)
+			obito::file::createFile(infoFileName_);
+			int offsetCursor = 0;
+			for (auto iter = columns.begin(); iter < columns.end(); iter++)
 			{
-				valueContainer.push_back(Value(output[i]));
+				obito::file::writeToFile(infoFileName_, iter->toBinary(), sizeof(Column), offsetCursor);
+				offsetCursor += sizeof(Column);
 			}
 		}
 
-		std::string ValueRow::toString()
+		void Table::loadColumnsFromFile()
 		{
-			std::string output = std::to_string(id);
-			for (auto it = valueContainer.begin(); it < valueContainer.end(); it++)
+			std::string tmp = obito::file::readAllStringFromFile(infoFileName_);
+			int length = tmp.length();
+
+			char* initColumnsStr = obito::file::turnStdStringToBinary(tmp);
+			
+			for (int offsetCursor = 0; offsetCursor < length; offsetCursor += sizeof(Column))
 			{
-				output += "&";
-				output += it->toString();
+				Column columnObj(initColumnsStr + offsetCursor);
+				columns.push_back(columnObj);
 			}
-			return output;
 		}
-
-		Table::Table(std::string tableName, std::vector<Column> columns)
-		{
-			columnVec_ = columns;
-			tableFileName = obito::common::generateTableFileName(tableName);
-			dataFileName = obito::common::generateDataFileName(tableName);
-		}
-
 	}
 }
