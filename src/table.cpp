@@ -1,6 +1,7 @@
 #include "table.h"
 
 #include "datafield/integer_field.h"
+#include "datafield/srv_datafield.h"
 
 namespace obito {
 	namespace table
@@ -43,7 +44,7 @@ namespace obito {
 			}
 		}
 
-		Row::Row(std::shared_ptr<Table> belongTable, char* initStr)
+		Row::Row(std::shared_ptr<Table> belongTable, char* initStr)		//Binary row length: sizeof(int)+sizeof(size_t)+rowSize
 		{
 			belongTablePtr = belongTable;
 
@@ -92,6 +93,11 @@ namespace obito {
 			return output;
 		}
 
+		size_t Row::getValueRowSize()
+		{
+			return sizeof(int) + sizeof(size_t) + rowSize;
+		}
+
 		Column::Column(std::string theColumnName, DataFieldEnum theValueType)
 		{
 			columnName = theColumnName;
@@ -108,12 +114,35 @@ namespace obito {
 			return reinterpret_cast<char*>(this);
 		}
 
+		size_t Column::getValueSize()
+		{
+			return obito::datafield::getValueSizeByDFE(valueType);
+		}
+
+		void Table::checkTableFile_()
+		{
+			if (!obito::file::isFileExist(infoFileName_))
+			{
+				obito::file::createFile(infoFileName_);
+			}
+			if (!obito::file::isFileExist(dataFileName_))
+			{
+				obito::file::createFile(dataFileName_);
+			}
+			if (!obito::file::isFileExist(columnsFileName_))
+			{
+				obito::file::createFile(columnsFileName_);
+			}
+		}
+
 		Table::Table(std::string theTableName)
 		{
 			tableName = theTableName;
 			infoFileName_ = obito::common::generateTableInfoFileName(tableName);
 			dataFileName_ = obito::common::generateTableDataFileName(tableName);
 			columnsFileName_ = obito::common::generateColumnsFileName(tableName);
+
+			checkTableFile_();
 		}
 
 		Table::Table(std::string theTableName, std::vector<Column> theColumns)
@@ -123,6 +152,7 @@ namespace obito {
 			dataFileName_ = obito::common::generateTableDataFileName(tableName);
 			columnsFileName_ = obito::common::generateColumnsFileName(tableName);
 
+			checkTableFile_();
 		}
 
 		void Table::addColumn(Column theColumn)
@@ -132,18 +162,18 @@ namespace obito {
 
 		void Table::syncColumnsToFile()
 		{
-			obito::file::createFile(infoFileName_);
+			obito::file::createFile(columnsFileName_);
 			int offsetCursor = 0;
 			for (auto iter = columns.begin(); iter < columns.end(); iter++)
 			{
-				obito::file::writeToFile(infoFileName_, iter->toBinary(), sizeof(Column), offsetCursor);
+				obito::file::writeToFile(columnsFileName_, iter->toBinary(), sizeof(Column), offsetCursor);
 				offsetCursor += sizeof(Column);
 			}
 		}
 
 		void Table::loadColumnsFromFile()
 		{
-			std::string tmp = obito::file::readAllStringFromFile(infoFileName_);
+			std::string tmp = obito::file::readAllStringFromFile(columnsFileName_);
 			int length = tmp.length();
 
 			char* initColumnsStr = obito::file::turnStdStringToBinary(tmp);
@@ -153,6 +183,21 @@ namespace obito {
 				Column columnObj(initColumnsStr + offsetCursor);
 				columns.push_back(columnObj);
 			}
+		}
+
+		std::string Table::getDataFileName()
+		{
+			return dataFileName_;
+		}
+
+		size_t Table::getValueRowSize()
+		{
+			size_t output = sizeof(int) + sizeof(size_t);
+			for (auto iter = columns.begin(); iter < columns.end(); iter++)
+			{
+				output += iter->getValueSize();
+			}
+			return output;
 		}
 	}
 }

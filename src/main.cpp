@@ -5,16 +5,17 @@
 #include "index/memory_rbtree.h"
 #include "datafield/integer_field.h"
 #include <bitset>
+#include "presistence.h"
 
 
 using namespace std;
 
-int main()
+void script1()
 {
 	obito::table::Column c1("oneColumn", obito::datafield::IntegerFieldEnum);
 	obito::table::Column c2("twoColumn", obito::datafield::IntegerFieldEnum);
 	obito::table::Column c3("threeColumn", obito::datafield::IntegerFieldEnum);
-	auto t1=new obito::table::Table("TestTable");
+	auto t1 = new obito::table::Table("TestTable");
 	t1->addColumn(c1);
 	t1->addColumn(c2);
 	t1->addColumn(c3);
@@ -36,5 +37,47 @@ int main()
 	obito::table::Row r2(tablePtr, initStr);
 	cout << r2.id << endl;
 	r2.printRow();
+	cout << tablePtr->getValueRowSize() << endl;
+	cout << r1.getValueRowSize() << endl;
+	cout << r2.getValueRowSize() << endl;
+}
+
+void writeRowScript()
+{
+	obito::table::Column c1("oneColumn", obito::datafield::IntegerFieldEnum);
+	obito::table::Column c2("twoColumn", obito::datafield::IntegerFieldEnum);
+	obito::table::Column c3("threeColumn", obito::datafield::IntegerFieldEnum);
+	std::vector<obito::table::Column> columns;
+	columns.push_back(c1);
+	columns.push_back(c2);
+	columns.push_back(c3);
+	obito::presistence::PresistenceHandler ph("presistencetable", columns);
+	obito::table::Value v1(std::make_shared<obito::datafield::IntegerField>(3));
+	obito::table::Value v2(std::make_shared<obito::datafield::IntegerField>(5));
+	obito::table::Value v3(std::make_shared<obito::datafield::IntegerField>(99));
+	std::vector<obito::table::Value> values;
+	values.push_back(v1);
+	values.push_back(v2);
+	values.push_back(v3);
+	ph.writeRow(1, values);
+}
+
+void readRowScript()
+{
+	obito::table::Column c1("oneColumn", obito::datafield::IntegerFieldEnum);
+	obito::table::Column c2("twoColumn", obito::datafield::IntegerFieldEnum);
+	obito::table::Column c3("threeColumn", obito::datafield::IntegerFieldEnum);
+	std::vector<obito::table::Column> columns;
+	columns.push_back(c1);
+	columns.push_back(c2);
+	columns.push_back(c3);
+	obito::presistence::PresistenceHandler ph("presistencetable", columns);
+	Row row = ph.readRow(1);
+	row.printRow();
+}
+
+
+int main()
+{
 	return 0;
 }

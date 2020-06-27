@@ -14,9 +14,6 @@
     <Filter Include="src\datafield">
       <UniqueIdentifier>{fa6d43dd-65ee-4a46-9213-885652f49783}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\presistence">
-      <UniqueIdentifier>{7a41b2e8-5497-4557-8703-b947d34cdba9}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitignore">
@@ -42,11 +39,11 @@
     <ClCompile Include="..\src\datafield\integer_field.cpp">
       <Filter>src\datafield</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\presistence\presistence.cpp">
-      <Filter>src\presistence</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\datafield\srv_datafield.cpp">
       <Filter>src\datafield</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\presistence.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -71,11 +68,11 @@
     <ClInclude Include="..\src\datafield\integer_field.h">
       <Filter>src\datafield</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\presistence\presistence.h">
-      <Filter>src\presistence</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\datafield\srv_datafield.h">
       <Filter>src\datafield</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\presistence.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

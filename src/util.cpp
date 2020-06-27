@@ -116,12 +116,12 @@ namespace obito
 
         std::string generateIndexFileName(std::string indexName)
         {
-            return indexName + ".dat";
+            return indexName + "Index.dat";
         }
 
         std::string generateIndexFragsFileName(std::string indexName)
         {
-            return indexName + "Frags.dat";
+            return indexName + "IndexFrags.dat";
         }
 
         std::vector<std::string> splitStr(std::string originStr, char token)

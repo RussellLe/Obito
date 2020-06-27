@@ -3,7 +3,6 @@
 #include "util.h"
 #include "datafield/i_data_field.h"
 
-
 typedef obito::datafield::DataFieldEnum DataFieldEnum;
 typedef obito::datafield::IDataField IDataField;
 
@@ -33,6 +32,7 @@ namespace obito {
 			Column(char* initStr);
 			Column(std::string theColumnName, DataFieldEnum theValueType);
 			char* toBinary();
+			size_t getValueSize();
 		};
 
 		class Table
@@ -49,10 +49,16 @@ namespace obito {
 			void syncColumnsToFile();
 			void loadColumnsFromFile();
 
+			std::string getDataFileName();
+			size_t getValueRowSize();
+
 		protected:
 			std::string infoFileName_;
 			std::string dataFileName_;
 			std::string columnsFileName_;
+
+		private:
+			void checkTableFile_();
 
 		};
 
@@ -72,6 +78,7 @@ namespace obito {
 			Row(std::shared_ptr<Table> belongTable, int theId, std::vector<Value> theValues);
 			void printRow();
 			char* toBinary();
+			size_t getValueRowSize();
 		};
 
 	}

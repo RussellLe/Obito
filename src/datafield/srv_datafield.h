@@ -7,6 +7,6 @@ namespace obito {
 	namespace datafield {
 
 
-
+		size_t getValueSizeByDFE(DataFieldEnum dfe);
 
 } }
