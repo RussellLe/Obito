@@ -24,6 +24,7 @@
   <ItemGroup>
     <ClCompile Include="..\src\datafield\integer_field.cpp" />
     <ClCompile Include="..\src\datafield\srv_datafield.cpp" />
+    <ClCompile Include="..\src\datafield\string_field.cpp" />
     <ClCompile Include="..\src\index\memory_rbtree.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\presistence.cpp" />
@@ -35,6 +36,7 @@
     <ClInclude Include="..\src\datafield\integer_field.h" />
     <ClInclude Include="..\src\datafield\i_data_field.h" />
     <ClInclude Include="..\src\datafield\srv_datafield.h" />
+    <ClInclude Include="..\src\datafield\string_field.h" />
     <ClInclude Include="..\src\index\i_index.h" />
     <ClInclude Include="..\src\index\memory_rbtree.h" />
     <ClInclude Include="..\src\presistence.h" />

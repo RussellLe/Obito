@@ -4,6 +4,7 @@
 #include "table.h"
 #include "index/memory_rbtree.h"
 #include "datafield/integer_field.h"
+#include "datafield/string_field.h"
 #include <bitset>
 #include "presistence.h"
 
@@ -45,39 +46,40 @@ void script1()
 void writeRowScript()
 {
 	obito::table::Column c1("oneColumn", obito::datafield::IntegerFieldEnum);
-	obito::table::Column c2("twoColumn", obito::datafield::IntegerFieldEnum);
+	obito::table::Column c2("twoColumn", obito::datafield::StringFieldEnum);
 	obito::table::Column c3("threeColumn", obito::datafield::IntegerFieldEnum);
 	std::vector<obito::table::Column> columns;
 	columns.push_back(c1);
 	columns.push_back(c2);
 	columns.push_back(c3);
 	obito::presistence::PresistenceHandler ph("presistencetable", columns);
-	obito::table::Value v1(std::make_shared<obito::datafield::IntegerField>(3));
-	obito::table::Value v2(std::make_shared<obito::datafield::IntegerField>(5));
-	obito::table::Value v3(std::make_shared<obito::datafield::IntegerField>(99));
+	obito::table::Value v1(std::make_shared<obito::datafield::IntegerField>(66));
+	obito::table::Value v2(std::make_shared<obito::datafield::StringField>("HELLOWORLD"));
+	obito::table::Value v3(std::make_shared<obito::datafield::IntegerField>(33));
 	std::vector<obito::table::Value> values;
 	values.push_back(v1);
 	values.push_back(v2);
 	values.push_back(v3);
-	ph.writeRow(1, values);
+	ph.writeRow(10, values);
 }
 
 void readRowScript()
 {
 	obito::table::Column c1("oneColumn", obito::datafield::IntegerFieldEnum);
-	obito::table::Column c2("twoColumn", obito::datafield::IntegerFieldEnum);
+	obito::table::Column c2("twoColumn", obito::datafield::StringFieldEnum);
 	obito::table::Column c3("threeColumn", obito::datafield::IntegerFieldEnum);
 	std::vector<obito::table::Column> columns;
 	columns.push_back(c1);
 	columns.push_back(c2);
 	columns.push_back(c3);
 	obito::presistence::PresistenceHandler ph("presistencetable", columns);
-	Row row = ph.readRow(1);
+	Row row = ph.readRow(5);
 	row.printRow();
 }
 
 
 int main()
 {
+	readRowScript();
 	return 0;
 }

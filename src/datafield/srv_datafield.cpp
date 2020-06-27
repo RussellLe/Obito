@@ -9,6 +9,8 @@ namespace obito {
 		{
 			switch (dfe)
 			{
+			case obito::datafield::DataFieldEnum::StringFieldEnum:
+				return STRING_FIELD_LENGTH;
 			case 2:
 				return sizeof(int);
 			default:

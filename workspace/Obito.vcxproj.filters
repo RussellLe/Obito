@@ -45,6 +45,9 @@
     <ClCompile Include="..\src\presistence.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\datafield\string_field.cpp">
+      <Filter>src\datafield</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\stdafx.h">
@@ -73,6 +76,9 @@
     </ClInclude>
     <ClInclude Include="..\src\presistence.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\datafield\string_field.h">
+      <Filter>src\datafield</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

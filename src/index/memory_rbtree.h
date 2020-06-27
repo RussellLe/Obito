@@ -24,6 +24,9 @@ namespace obito {
 			bool syncIndexToFile();
 			bool loadIndexFromFile();
 
+		private:
+			void printIndexContainer_();
+
 		};
 
 } }

@@ -13,4 +13,6 @@
 #define VALUE_SPLIT_CONST_CHAR_PTR "|"
 #define VALUE_SPLIT_CHAR '|'
 
+#define STRING_FIELD_LENGTH 255
+
 typedef unsigned int _value_type_int;

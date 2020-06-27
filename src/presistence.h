@@ -19,7 +19,8 @@ namespace obito {
 		public:
 			PresistenceHandler(std::string tableName, std::vector<Column> columns);
 			bool writeRow(int id, std::vector<Value> values);
-			Row readRow(int id);;
+			Row readRow(int id);
+			bool deleteRow(int id);
 
 		protected:
 			std::shared_ptr<Table> tablePtr_;

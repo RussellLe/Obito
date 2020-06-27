@@ -115,7 +115,7 @@ namespace obito {
 					}
 					//delete idOffsetUnit;
 				}
-				dataFileoffsetCursor_ = maxOffset;
+				dataFileoffsetCursor_ = maxOffset + valueRowSize_;
 			}
 
 			if (obito::file::isFileExist(indexFragFileName_))
@@ -131,8 +131,15 @@ namespace obito {
 					//delete fragsPtr;
 				}
 			}
-
 			return true;
+		}
+
+		void MemoryRBTree::printIndexContainer_()
+		{
+			for (auto iter = indexContainer_.begin(); iter != indexContainer_.end(); iter++)
+			{
+				std::cout << iter->first << ":" << iter->second << std::endl;
+			}
 		}
 
 } }

@@ -2,6 +2,7 @@
 
 #include "datafield/integer_field.h"
 #include "datafield/srv_datafield.h"
+#include "datafield/string_field.h"
 
 namespace obito {
 	namespace table
@@ -20,6 +21,8 @@ namespace obito {
 			case obito::datafield::IntegerFieldEnum:
 				valuePtr = std::make_shared<obito::datafield::IntegerField>(initStr);
 				break;
+			case obito::datafield::StringFieldEnum:
+				valuePtr = std::make_shared<obito::datafield::StringField>(initStr);
 			default:
 				break;
 			}

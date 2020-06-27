@@ -35,4 +35,10 @@ namespace obito {
 			return row;
 		}
 
+		bool PresistenceHandler::deleteRow(int id)
+		{
+			indexPtr_->deleteIndexUnit(id);
+			return true;
+		}
+
 } }
