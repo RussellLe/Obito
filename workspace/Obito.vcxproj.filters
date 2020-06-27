@@ -48,6 +48,12 @@
     <ClCompile Include="..\src\datafield\string_field.cpp">
       <Filter>src\datafield</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\datafield\double_field.cpp">
+      <Filter>src\datafield</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\datafield\float_field.cpp">
+      <Filter>src\datafield</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\stdafx.h">
@@ -78,6 +84,12 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\src\datafield\string_field.h">
+      <Filter>src\datafield</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\datafield\double_field.h">
+      <Filter>src\datafield</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\datafield\float_field.h">
       <Filter>src\datafield</Filter>
     </ClInclude>
   </ItemGroup>

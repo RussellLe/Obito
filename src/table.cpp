@@ -3,6 +3,8 @@
 #include "datafield/integer_field.h"
 #include "datafield/srv_datafield.h"
 #include "datafield/string_field.h"
+#include "datafield/double_field.h"
+#include "datafield/float_field.h"
 
 namespace obito {
 	namespace table
@@ -23,6 +25,13 @@ namespace obito {
 				break;
 			case obito::datafield::StringFieldEnum:
 				valuePtr = std::make_shared<obito::datafield::StringField>(initStr);
+				break;
+			case obito::datafield::DoubleFieldEnum:
+				valuePtr = std::make_shared<obito::datafield::DoubleField>(initStr);
+				break;
+			case obito::datafield::FloatFieldEnum:
+				valuePtr = std::make_shared<obito::datafield::FloatField>(initStr);
+				break;
 			default:
 				break;
 			}
@@ -61,7 +70,7 @@ namespace obito {
 			{
 				Value valueObj(iter->valueType, initStr + offsetCursor);
 				values.push_back(valueObj);
-				offsetCursor += valueObj.valuePtr->getValueSize();
+				offsetCursor += iter->getValueSize();
 			}
 		}
 

@@ -5,6 +5,8 @@
 #include "index/memory_rbtree.h"
 #include "datafield/integer_field.h"
 #include "datafield/string_field.h"
+#include "datafield/double_field.h"
+#include "datafield/float_field.h"
 #include <bitset>
 #include "presistence.h"
 
@@ -45,17 +47,17 @@ void script1()
 
 void writeRowScript()
 {
-	obito::table::Column c1("oneColumn", obito::datafield::IntegerFieldEnum);
+	obito::table::Column c1("oneColumn", obito::datafield::FloatFieldEnum);
 	obito::table::Column c2("twoColumn", obito::datafield::StringFieldEnum);
-	obito::table::Column c3("threeColumn", obito::datafield::IntegerFieldEnum);
+	obito::table::Column c3("threeColumn", obito::datafield::DoubleFieldEnum);
 	std::vector<obito::table::Column> columns;
 	columns.push_back(c1);
 	columns.push_back(c2);
 	columns.push_back(c3);
 	obito::presistence::PresistenceHandler ph("presistencetable", columns);
-	obito::table::Value v1(std::make_shared<obito::datafield::IntegerField>(66));
+	obito::table::Value v1(std::make_shared<obito::datafield::FloatField>(6.6));
 	obito::table::Value v2(std::make_shared<obito::datafield::StringField>("HELLOWORLD"));
-	obito::table::Value v3(std::make_shared<obito::datafield::IntegerField>(33));
+	obito::table::Value v3(std::make_shared<obito::datafield::DoubleField>(33.33));
 	std::vector<obito::table::Value> values;
 	values.push_back(v1);
 	values.push_back(v2);
@@ -65,15 +67,15 @@ void writeRowScript()
 
 void readRowScript()
 {
-	obito::table::Column c1("oneColumn", obito::datafield::IntegerFieldEnum);
+	obito::table::Column c1("oneColumn", obito::datafield::FloatFieldEnum);
 	obito::table::Column c2("twoColumn", obito::datafield::StringFieldEnum);
-	obito::table::Column c3("threeColumn", obito::datafield::IntegerFieldEnum);
+	obito::table::Column c3("threeColumn", obito::datafield::DoubleFieldEnum);
 	std::vector<obito::table::Column> columns;
 	columns.push_back(c1);
 	columns.push_back(c2);
 	columns.push_back(c3);
 	obito::presistence::PresistenceHandler ph("presistencetable", columns);
-	Row row = ph.readRow(5);
+	Row row = ph.readRow(10);
 	row.printRow();
 }
 

@@ -22,6 +22,8 @@
     <None Include="..\.gitignore" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\datafield\double_field.cpp" />
+    <ClCompile Include="..\src\datafield\float_field.cpp" />
     <ClCompile Include="..\src\datafield\integer_field.cpp" />
     <ClCompile Include="..\src\datafield\srv_datafield.cpp" />
     <ClCompile Include="..\src\datafield\string_field.cpp" />
@@ -33,6 +35,8 @@
     <ClCompile Include="..\src\util.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\src\datafield\double_field.h" />
+    <ClInclude Include="..\src\datafield\float_field.h" />
     <ClInclude Include="..\src\datafield\integer_field.h" />
     <ClInclude Include="..\src\datafield\i_data_field.h" />
     <ClInclude Include="..\src\datafield\srv_datafield.h" />

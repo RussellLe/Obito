@@ -11,8 +11,12 @@ namespace obito {
 			{
 			case obito::datafield::DataFieldEnum::StringFieldEnum:
 				return STRING_FIELD_LENGTH;
-			case 2:
+			case obito::datafield::DataFieldEnum::IntegerFieldEnum:
 				return sizeof(int);
+			case obito::datafield::DataFieldEnum::DoubleFieldEnum:
+				return sizeof(double);
+			case obito::datafield::DataFieldEnum::FloatFieldEnum:
+				return sizeof(float);
 			default:
 				return 0;
 			}
