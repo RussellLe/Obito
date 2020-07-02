@@ -6,9 +6,9 @@
 namespace obito {
 	namespace presistence {
 
-		PresistenceHandler::PresistenceHandler(std::string tableName, std::vector<Column> columns)
+		PresistenceHandler::PresistenceHandler(std::shared_ptr<Table> tablePtr, std::vector<Column> columns)
 		{
-			tablePtr_ = std::make_shared<Table>(tableName);
+			tablePtr_ = tablePtr;
 			tablePtr_->columns = columns;
 			valueRowSize_ = tablePtr_->getValueRowSize();
 			indexPtr_ = std::make_shared<obito::index::MemoryRBTree>(obito::common::generateIndexFileName(tablePtr_->tableName),
@@ -18,6 +18,13 @@ namespace obito {
 		bool PresistenceHandler::writeRow(int id, std::vector<Value> values)
 		{
 			Row row(tablePtr_, id, values);
+			int offset = indexPtr_->addIndexUnit(row.id);
+			obito::file::writeToFile(tablePtr_->getDataFileName(), row.toBinary(), valueRowSize_, offset);
+			return true;
+		}
+
+		bool PresistenceHandler::writeRow(int id, Row row)
+		{
 			int offset = indexPtr_->addIndexUnit(row.id);
 			obito::file::writeToFile(tablePtr_->getDataFileName(), row.toBinary(), valueRowSize_, offset);
 			return true;

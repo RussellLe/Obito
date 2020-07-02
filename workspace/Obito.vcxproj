@@ -22,6 +22,8 @@
     <None Include="..\.gitignore" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\bufferpool\main_buffer_pool.cpp" />
+    <ClCompile Include="..\src\cache\main_cache.cpp" />
     <ClCompile Include="..\src\datafield\double_field.cpp" />
     <ClCompile Include="..\src\datafield\float_field.cpp" />
     <ClCompile Include="..\src\datafield\integer_field.cpp" />
@@ -35,6 +37,10 @@
     <ClCompile Include="..\src\util.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\src\bufferpool\i_buffer_pool.h" />
+    <ClInclude Include="..\src\bufferpool\main_buffer_pool.h" />
+    <ClInclude Include="..\src\cache\i_cache.h" />
+    <ClInclude Include="..\src\cache\main_cache.h" />
     <ClInclude Include="..\src\datafield\double_field.h" />
     <ClInclude Include="..\src\datafield\float_field.h" />
     <ClInclude Include="..\src\datafield\integer_field.h" />

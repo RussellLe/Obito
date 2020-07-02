@@ -9,7 +9,8 @@
 #include "datafield/float_field.h"
 #include <bitset>
 #include "presistence.h"
-
+#include "cache/i_cache.h"
+#include "cache/main_cache.h"
 
 using namespace std;
 
@@ -54,7 +55,8 @@ void writeRowScript()
 	columns.push_back(c1);
 	columns.push_back(c2);
 	columns.push_back(c3);
-	obito::presistence::PresistenceHandler ph("presistencetable", columns);
+	std::shared_ptr<obito::table::Table> tablePtr = std::make_shared<obito::table::Table>("presistencetable");
+	obito::presistence::PresistenceHandler ph(tablePtr, columns);
 	obito::table::Value v1(std::make_shared<obito::datafield::FloatField>(6.6));
 	obito::table::Value v2(std::make_shared<obito::datafield::StringField>("HELLOWORLD"));
 	obito::table::Value v3(std::make_shared<obito::datafield::DoubleField>(33.33));
@@ -74,14 +76,46 @@ void readRowScript()
 	columns.push_back(c1);
 	columns.push_back(c2);
 	columns.push_back(c3);
-	obito::presistence::PresistenceHandler ph("presistencetable", columns);
+	std::shared_ptr<obito::table::Table> tablePtr = std::make_shared<obito::table::Table>("presistencetable");
+	obito::presistence::PresistenceHandler ph(tablePtr, columns);
 	Row row = ph.readRow(10);
 	row.printRow();
+}
+
+void testCacheScript()
+{
+	obito::cache::MainCache mbp;
+	std::shared_ptr<obito::table::Table> tablePtr = std::make_shared<obito::table::Table>("testbuffertable");
+	obito::table::Value v1(std::make_shared<obito::datafield::FloatField>(6.6));
+	obito::table::Value v2(std::make_shared<obito::datafield::StringField>("HELLOWORLD"));
+	obito::table::Value v3(std::make_shared<obito::datafield::DoubleField>(33.33));
+	std::vector<obito::table::Value> values;
+	values.push_back(v1);
+	values.push_back(v2);
+	values.push_back(v3);
+	for (int i = 1; i < 300; i++)
+	{
+		obito::table::Row r_tmp(tablePtr, i, values);
+		mbp.addToCache(r_tmp);
+	}
+	std::cout << mbp.checkIdExist(3) << std::endl;
+	cout << mbp.checkIdExist(30) << endl;
+	cout << mbp.checkIdExist(128) << endl;
+	mbp.readFromCache(128).printRow();
+	mbp.readFromCache(149).printRow();
+	mbp.readFromCache(29).printRow();
+	mbp.readFromCache(132).printRow();
+	for (auto iter = mbp.idLink.begin(); iter != mbp.idLink.end(); iter++)
+	{
+		std::cout << *iter << ' ';
+	}
+	cout << endl;
+	std::cout << "middle in:" << *mbp.idLinkMiddle << endl;
 }
 
 
 int main()
 {
-	readRowScript();
+	testCacheScript();
 	return 0;
 }

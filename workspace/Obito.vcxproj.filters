@@ -14,6 +14,12 @@
     <Filter Include="src\datafield">
       <UniqueIdentifier>{fa6d43dd-65ee-4a46-9213-885652f49783}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\bufferpool">
+      <UniqueIdentifier>{1a3b2e06-6636-4e56-89ad-5c60b7d4db76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\cache">
+      <UniqueIdentifier>{e67481cd-ae7e-4b05-b0e2-e11697846634}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitignore">
@@ -54,6 +60,12 @@
     <ClCompile Include="..\src\datafield\float_field.cpp">
       <Filter>src\datafield</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\bufferpool\main_buffer_pool.cpp">
+      <Filter>src\bufferpool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\cache\main_cache.cpp">
+      <Filter>src\cache</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\stdafx.h">
@@ -91,6 +103,18 @@
     </ClInclude>
     <ClInclude Include="..\src\datafield\float_field.h">
       <Filter>src\datafield</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\bufferpool\i_buffer_pool.h">
+      <Filter>src\bufferpool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\bufferpool\main_buffer_pool.h">
+      <Filter>src\bufferpool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\cache\i_cache.h">
+      <Filter>src\cache</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\cache\main_cache.h">
+      <Filter>src\cache</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
