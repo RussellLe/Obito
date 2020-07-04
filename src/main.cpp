@@ -64,7 +64,10 @@ void writeRowScript()
 	values.push_back(v1);
 	values.push_back(v2);
 	values.push_back(v3);
-	ph.writeRow(10, values);
+	for (int i = 1; i < 500; i++)
+	{
+		ph.writeRow(i, values);
+	}
 }
 
 void readRowScript()
@@ -78,8 +81,11 @@ void readRowScript()
 	columns.push_back(c3);
 	std::shared_ptr<obito::table::Table> tablePtr = std::make_shared<obito::table::Table>("presistencetable");
 	obito::presistence::PresistenceHandler ph(tablePtr, columns);
-	Row row = ph.readRow(10);
-	row.printRow();
+	for (int i = 1; i < 500; i++)
+	{
+		Row row = ph.readRow(i);
+		row.printRow();
+	}
 }
 
 void testCacheScript()
@@ -116,6 +122,6 @@ void testCacheScript()
 
 int main()
 {
-	testCacheScript();
+	readRowScript();
 	return 0;
 }

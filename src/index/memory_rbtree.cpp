@@ -91,7 +91,6 @@ namespace obito {
 					offsetCursorTmp += sizeof(int);
 				}
 			}
-
 			return true;
 		}
 

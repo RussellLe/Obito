@@ -7,6 +7,7 @@
 #include <sstream>
 #include <map>
 #include <list>
+#include <iterator>
 
 #define _CRT_SECURE_NO_WARNINGS
 #pragma  warning (disable:4996) 

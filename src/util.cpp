@@ -70,7 +70,7 @@ namespace obito {
 
         std::string readAllStringFromFile(std::string fileName)
         {
-            std::ifstream in(fileName);
+            std::ifstream in(fileName, std::ios::binary);
             std::ostringstream tmp;
             tmp << in.rdbuf();
             std::string str = tmp.str();

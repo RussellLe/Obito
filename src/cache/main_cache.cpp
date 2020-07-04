@@ -10,6 +10,10 @@ namespace obito {
 			hotEndLine_ = static_cast<int>(cacheMaxSize_ * MAIN_CACHE_HOT_RATE);
 		}
 
+		MainCache::~MainCache()
+		{
+			//
+		}
 
 		bool MainCache::addToCache(Row row)
 		{
@@ -28,12 +32,9 @@ namespace obito {
 
 		bool MainCache::checkIdExist(int id)
 		{
-			for (auto iter = idLink.begin(); iter != idLink.end(); iter++)
+			if (dataPool.find(id) != dataPool.end())
 			{
-				if (*iter == id)
-				{
-					return true;
-				}
+				return true;
 			}
 
 			return false;
@@ -52,10 +53,41 @@ namespace obito {
 
 			dataPool.erase(dataPool.find(eliminateId));
 
-			rightSlidCount_++;
+			leftSlidCount_++;
 
 			updateIdLinkMiddle_();
 			return true;
+		}
+
+		bool MainCache::deleteFromCache(int id)
+		{
+			if (checkIdExist(id))
+			{
+				dataPool.erase(dataPool.find(id));
+
+
+				bool rightSlidFlag = false;
+				for (auto iter = idLink.begin(); iter != idLink.end(); iter++)
+				{
+					if (*iter == *idLinkMiddle)
+					{
+						rightSlidFlag = true;
+					}
+					if (*iter == id)
+					{
+						idLink.erase(iter);
+						break;
+					}
+				}
+				if (rightSlidFlag)
+				{
+					rightSlidCount_++;
+				}
+
+
+				return true;
+			}
+			return false;
 		}
 
 		void MainCache::updateIdLinkMiddle_()
@@ -67,7 +99,7 @@ namespace obito {
 			}
 			while (rightSlidCount_ >= 2)
 			{
-				idLinkMiddle--;
+				idLinkMiddle++;
 				rightSlidCount_ -= 2;
 			}
 			while (hotSwapCount_ >= 2)
