@@ -34,7 +34,7 @@ namespace obito {
 			}
 
 			bufferPtr_->addToBuffer(row);
-			std::cout << "write to buffer" << std::endl;
+
 			if (bufferPtr_->getFlushStatus())
 			{
 				flushBuffer_();
@@ -76,24 +76,20 @@ namespace obito {
 			int startOffset = indexPtr_->addIndexUnits(idVec);
 
 			obito::file::writeToFile(tablePtr_->getDataFileName(), writeBufferTmp, valueRowSize_ * rows.size(), startOffset);
-			std::cout << "write to file" << std::endl;
 		}
 
 		Row PresistenceHandler::readRow(int id)
 		{
 			if (cachePtr_->checkIdExist(id))		//read from cache first
 			{
-				std::cout << "read from cache" << std::endl;
 				return cachePtr_->readFromCache(id);
 			}
 			if (bufferPtr_->checkIdExist(id))
 			{
-				std::cout << "read from buffer" << std::endl;
 				Row row = bufferPtr_->readFromBuffer(id);
 				cachePtr_->addToCache(row);
 				return row;
 			}
-			std::cout << "read from file" << std::endl;
 			int offset = indexPtr_->getOffset(id);
 			char* buffer = (char*)malloc(valueRowSize_);
 			obito::file::readFromFile(tablePtr_->getDataFileName(), buffer, valueRowSize_, offset);
