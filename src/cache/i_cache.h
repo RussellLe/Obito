@@ -16,6 +16,7 @@ namespace obito {
 			virtual bool checkIdExist(int id) = 0;
 			virtual Row readFromCache(int id) = 0;
 			virtual bool deleteFromCache(int id) = 0;
+			virtual bool updateCacheRow(Row row) = 0;
 		};
 
 

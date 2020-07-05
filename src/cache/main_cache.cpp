@@ -90,6 +90,17 @@ namespace obito {
 			return false;
 		}
 
+		bool MainCache::updateCacheRow(Row row)
+		{
+			if (!checkIdExist(row.id))
+			{
+				return false;
+			}
+			deleteFromCache(row.id);
+			addToCache(row);
+			return true;
+		}
+
 		void MainCache::updateIdLinkMiddle_()
 		{
 			while (leftSlidCount_ >= 2)

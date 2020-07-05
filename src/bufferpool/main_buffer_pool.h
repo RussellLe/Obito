@@ -17,6 +17,10 @@ namespace obito {
 			bool checkIdExist(int id);
 			Row readFromBuffer(int id);
 
+			std::vector<Row> getRowsFromBuffer();
+			bool cleanBuffer();
+			bool getFlushStatus();
+
 		public:
 			std::map<int, Row> dataPool;
 			bool flushFlag = false;

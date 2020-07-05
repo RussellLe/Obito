@@ -1,6 +1,7 @@
 #include "presistence.h"
 #include "index/memory_rbtree.h"
 #include "cache/main_cache.h"
+#include "bufferpool/main_buffer_pool.h"
 
 
 
@@ -17,6 +18,28 @@ namespace obito {
 			indexPtr_ = std::make_shared<obito::index::MemoryRBTree>(obito::common::generateIndexFileName(tablePtr_->tableName),
 				obito::common::generateIndexFragsFileName(tablePtr_->tableName), valueRowSize_);
 			cachePtr_ = std::make_shared<obito::cache::MainCache>();
+			bufferPtr_ = std::make_shared<obito::buffer::MainBufferPool>();
+		}
+
+		PresistenceHandler::~PresistenceHandler()
+		{
+			flushBuffer_();
+		}
+
+		bool PresistenceHandler::addRow(Row row)
+		{
+			if (cachePtr_->checkIdExist(row.id))
+			{
+				cachePtr_->updateCacheRow(row);
+			}
+
+			bufferPtr_->addToBuffer(row);
+			std::cout << "write to buffer" << std::endl;
+			if (bufferPtr_->getFlushStatus())
+			{
+				flushBuffer_();
+			}
+			return true;
 		}
 
 		bool PresistenceHandler::writeRow(int id, std::vector<Value> values)
@@ -53,15 +76,24 @@ namespace obito {
 			int startOffset = indexPtr_->addIndexUnits(idVec);
 
 			obito::file::writeToFile(tablePtr_->getDataFileName(), writeBufferTmp, valueRowSize_ * rows.size(), startOffset);
+			std::cout << "write to file" << std::endl;
 		}
 
 		Row PresistenceHandler::readRow(int id)
 		{
 			if (cachePtr_->checkIdExist(id))		//read from cache first
 			{
+				std::cout << "read from cache" << std::endl;
 				return cachePtr_->readFromCache(id);
 			}
-
+			if (bufferPtr_->checkIdExist(id))
+			{
+				std::cout << "read from buffer" << std::endl;
+				Row row = bufferPtr_->readFromBuffer(id);
+				cachePtr_->addToCache(row);
+				return row;
+			}
+			std::cout << "read from file" << std::endl;
 			int offset = indexPtr_->getOffset(id);
 			char* buffer = (char*)malloc(valueRowSize_);
 			obito::file::readFromFile(tablePtr_->getDataFileName(), buffer, valueRowSize_, offset);
@@ -75,6 +107,14 @@ namespace obito {
 		{
 			indexPtr_->deleteIndexUnit(id);
 			cachePtr_->deleteFromCache(id);
+			return true;
+		}
+
+		bool PresistenceHandler::flushBuffer_()
+		{
+			std::vector<Row> rows = bufferPtr_->getRowsFromBuffer();
+			bufferPtr_->cleanBuffer();
+			writeRows(rows);
 			return true;
 		}
 

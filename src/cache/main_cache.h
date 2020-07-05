@@ -19,6 +19,7 @@ namespace obito {
 			bool checkIdExist(int id);
 			Row readFromCache(int id);
 			bool deleteFromCache(int id);
+			bool updateCacheRow(Row row);
 
 		protected:
 			bool cacheEliminate_();

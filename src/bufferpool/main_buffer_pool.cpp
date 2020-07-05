@@ -47,5 +47,26 @@ namespace obito {
 			return dataPool.find(id)->second;
 		}
 
+		std::vector<Row> MainBufferPool::getRowsFromBuffer()
+		{
+			std::vector<Row> rows;
+			for (auto iter = dataPool.begin(); iter != dataPool.end(); iter++)
+			{
+				rows.push_back(iter->second);
+			}
+			return rows;
+		}
+
+		bool MainBufferPool::cleanBuffer()
+		{
+			dataPool.clear();
+			return true;
+		}
+
+		bool MainBufferPool::getFlushStatus()
+		{
+			return flushFlag;
+		}
+
 	}
 }
