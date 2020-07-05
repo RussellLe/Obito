@@ -27,11 +27,32 @@ namespace obito {
 			return true;
 		}
 
-		bool PresistenceHandler::writeRow(int id, Row row)
+		bool PresistenceHandler::writeRow(Row row)
 		{
 			int offset = indexPtr_->addIndexUnit(row.id);
 			obito::file::writeToFile(tablePtr_->getDataFileName(), row.toBinary(), valueRowSize_, offset);
 			return true;
+		}
+
+		bool PresistenceHandler::writeRows(std::vector<Row> rows)
+		{
+			if (rows.empty())
+			{
+				return false;
+			}
+			char* writeBufferTmp = (char*)malloc(valueRowSize_ * rows.size());
+			int memcpyOffset = 0;
+
+			std::vector<int> idVec;
+			for (auto iter = rows.begin(); iter < rows.end(); iter++)
+			{
+				idVec.push_back(iter->id);
+				memcpy(writeBufferTmp + memcpyOffset, iter->toBinary(), valueRowSize_);
+				memcpyOffset += valueRowSize_;
+			}
+			int startOffset = indexPtr_->addIndexUnits(idVec);
+
+			obito::file::writeToFile(tablePtr_->getDataFileName(), writeBufferTmp, valueRowSize_ * rows.size(), startOffset);
 		}
 
 		Row PresistenceHandler::readRow(int id)

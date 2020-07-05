@@ -40,6 +40,17 @@ namespace obito {
 			return nowOffset;
 		}
 
+		int MemoryRBTree::addIndexUnits(std::vector<int> idVec)
+		{
+			int startOffset = dataFileoffsetCursor_;
+			for (auto iter = idVec.begin(); iter < idVec.end(); iter++)
+			{
+				indexContainer_.insert(std::pair<int, int>(*iter, dataFileoffsetCursor_));
+				dataFileoffsetCursor_ += valueRowSize_;
+			}
+			return startOffset;
+		}
+
 		int MemoryRBTree::getOffset(int id)
 		{
 			if (indexContainer_.find(id) == indexContainer_.end())

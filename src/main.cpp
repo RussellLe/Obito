@@ -64,10 +64,13 @@ void writeRowScript()
 	values.push_back(v1);
 	values.push_back(v2);
 	values.push_back(v3);
+	std::vector<Row> rows;
 	for (int i = 1; i < 500; i++)
 	{
-		ph.writeRow(i, values);
+		Row row(tablePtr, i, values);
+		rows.push_back(row);
 	}
+	ph.writeRows(rows);
 }
 
 void readRowScript()

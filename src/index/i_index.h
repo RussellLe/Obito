@@ -11,6 +11,7 @@ namespace obito {
 		public:
 			virtual ~IIndex() {};
 			virtual int addIndexUnit(int id) = 0;
+			virtual int addIndexUnits(std::vector<int> idVec) = 0;
 			virtual int getOffset(int id) = 0;
 			virtual bool deleteIndexUnit(int id) = 0;
 		};

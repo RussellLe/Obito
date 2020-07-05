@@ -12,6 +12,7 @@ namespace obito {
 			MemoryRBTree(std::string theIndexFileName, std::string theIndexFragFileName, size_t theValueRowSize);
 			~MemoryRBTree();
 			int addIndexUnit(int id);
+			int addIndexUnits(std::vector<int> idVec);
 			int getOffset(int id);
 			bool deleteIndexUnit(int id);
 
