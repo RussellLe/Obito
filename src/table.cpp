@@ -49,6 +49,7 @@ namespace obito {
 
 			id = theId;
 			values = theValues;
+			transactionId = 0;
 			rowSize = 0;
 			for (auto iter = values.begin(); iter < values.end(); iter++)
 			{
@@ -56,14 +57,15 @@ namespace obito {
 			}
 		}
 
-		Row::Row(std::shared_ptr<Table> belongTable, char* initStr)		//Binary row length: sizeof(int)+sizeof(size_t)+rowSize
+		Row::Row(std::shared_ptr<Table> belongTable, char* initStr)		//Binary row length: 2*sizeof(int)+sizeof(size_t)+rowSize
 		{
 			belongTablePtr = belongTable;
 
-			memcpy(&id, initStr, sizeof(int));
-			memcpy(&rowSize, initStr + sizeof(int), sizeof(size_t));
+			memcpy(&id, initStr, sizeof(id));
+			memcpy(&rowSize, initStr + sizeof(id), sizeof(rowSize));
+			memcpy(&transactionId, initStr + sizeof(id) + sizeof(rowSize), sizeof(transactionId));
 
-			int offsetCursor = sizeof(int) + sizeof(size_t);
+			int offsetCursor = sizeof(id) + sizeof(rowSize) + sizeof(transactionId);
 			int totalSize = rowSize + offsetCursor;
 
 			for (auto iter = belongTablePtr->columns.begin(); iter < belongTablePtr->columns.end(); iter++)
@@ -77,6 +79,7 @@ namespace obito {
 		void Row::printRow()
 		{
 			std::cout << id << ' ';
+			std::cout << transactionId << ' ';
 			for (auto iter = values.begin(); iter < values.end(); iter++)
 			{
 				iter->printValue();
@@ -87,16 +90,17 @@ namespace obito {
 
 		char* Row::toBinary()
 		{
-			char* output = (char*)malloc(sizeof(id) + sizeof(rowSize) + rowSize);
+			char* output = (char*)malloc(sizeof(id) + sizeof(rowSize) +sizeof(transactionId) + rowSize);
 
 			char* idStr = reinterpret_cast<char*>(&id);
 			char* sizeStr =  reinterpret_cast<char*>(&rowSize);
-
+			char* transactionIdStr = reinterpret_cast<char*>(&transactionId);
 
 			memcpy(output, idStr, sizeof(id));
 			memcpy(output + sizeof(id), sizeStr, sizeof(rowSize));
+			memcpy(output + sizeof(id) + sizeof(rowSize), transactionIdStr, sizeof(transactionId));
 
-			int offsetCursor = sizeof(id) + sizeof(rowSize);
+			int offsetCursor = sizeof(id) + sizeof(rowSize) + sizeof(transactionId);
 			for (auto iter = values.begin(); iter < values.end(); iter++)
 			{
 				memcpy(output + offsetCursor, iter->valuePtr->toBinary(), iter->valuePtr->getValueSize());
@@ -107,7 +111,7 @@ namespace obito {
 
 		size_t Row::getValueRowSize()
 		{
-			return sizeof(int) + sizeof(size_t) + rowSize;
+			return sizeof(int) + sizeof(size_t) + sizeof(transactionId) + rowSize;
 		}
 
 		Column::Column(std::string theColumnName, DataFieldEnum theValueType)
@@ -204,7 +208,7 @@ namespace obito {
 
 		size_t Table::getValueRowSize()
 		{
-			size_t output = sizeof(int) + sizeof(size_t);
+			size_t output = 2 * sizeof(int) + sizeof(size_t);
 			for (auto iter = columns.begin(); iter < columns.end(); iter++)
 			{
 				output += iter->getValueSize();

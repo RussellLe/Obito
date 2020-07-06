@@ -152,6 +152,7 @@ void commandTestScript()
 			{
 				std::cout << "writing id:" << id << endl;
 				Row row(tablePtr, id, values);
+				row.transactionId = 999;
 				ph.addRow(row);
 				id++;
 			}

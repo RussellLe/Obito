@@ -66,6 +66,7 @@ namespace obito {
 		{
 		public:
 			int id;
+			int transactionId;
 			std::vector<Value> values;
 			size_t rowSize;
 			
