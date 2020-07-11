@@ -29,11 +29,14 @@
     <ClCompile Include="..\src\datafield\integer_field.cpp" />
     <ClCompile Include="..\src\datafield\srv_datafield.cpp" />
     <ClCompile Include="..\src\datafield\string_field.cpp" />
+    <ClCompile Include="..\src\global.cpp" />
     <ClCompile Include="..\src\index\memory_rbtree.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\presistence.cpp" />
     <ClCompile Include="..\src\stdafx.cpp" />
     <ClCompile Include="..\src\table.cpp" />
+    <ClCompile Include="..\src\transaction\transaction_mgr.cpp" />
+    <ClCompile Include="..\src\transaction\transaction_obj.cpp" />
     <ClCompile Include="..\src\util.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -47,11 +50,14 @@
     <ClInclude Include="..\src\datafield\i_data_field.h" />
     <ClInclude Include="..\src\datafield\srv_datafield.h" />
     <ClInclude Include="..\src\datafield\string_field.h" />
+    <ClInclude Include="..\src\global.h" />
     <ClInclude Include="..\src\index\i_index.h" />
     <ClInclude Include="..\src\index\memory_rbtree.h" />
     <ClInclude Include="..\src\presistence.h" />
     <ClInclude Include="..\src\stdafx.h" />
     <ClInclude Include="..\src\table.h" />
+    <ClInclude Include="..\src\transaction\transaction_mgr.h" />
+    <ClInclude Include="..\src\transaction\transaction_obj.h" />
     <ClInclude Include="..\src\util.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

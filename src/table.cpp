@@ -76,6 +76,12 @@ namespace obito {
 			}
 		}
 
+		bool Row::setTransactionId(int theTransactionId)
+		{
+			transactionId = theTransactionId;
+			return true;
+		}
+
 		void Row::printRow()
 		{
 			std::cout << id << ' ';

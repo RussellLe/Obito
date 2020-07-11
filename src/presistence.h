@@ -25,8 +25,7 @@ namespace obito {
 			PresistenceHandler(std::shared_ptr<Table> tablePtr, std::vector<Column> columns);
 			~PresistenceHandler();
 			bool addRow(Row row);								//add to all
-			bool writeRow(int id, std::vector<Value> values);		//write to file directly
-			bool writeRow(Row row);
+			bool writeRow(Row row);			//write to file directly
 			bool writeRows(std::vector<Row> rows);			//write to file directly (used to flush buffer)
 			Row readRow(int id);				//read from all
 			bool deleteRow(int id);				//delete from all

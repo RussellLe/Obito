@@ -77,6 +77,7 @@ namespace obito {
 			Row(){}
 			Row(std::shared_ptr<Table> belongTable, char* initStr);
 			Row(std::shared_ptr<Table> belongTable, int theId, std::vector<Value> theValues);
+			bool setTransactionId(int theTransactionId);
 			void printRow();
 			char* toBinary();
 			size_t getValueRowSize();

@@ -68,6 +68,7 @@ void writeRowScript()
 	for (int i = 1; i < 500; i++)
 	{
 		Row row(tablePtr, i, values);
+		row.transactionId = 999;
 		rows.push_back(row);
 	}
 	ph.writeRows(rows);
@@ -173,9 +174,8 @@ void commandTestScript()
 	}
 }
 
-
 int main()
 {
-	commandTestScript();
+	readRowScript();
 	return 0;
 }

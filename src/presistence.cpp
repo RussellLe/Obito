@@ -42,14 +42,6 @@ namespace obito {
 			return true;
 		}
 
-		bool PresistenceHandler::writeRow(int id, std::vector<Value> values)
-		{
-			Row row(tablePtr_, id, values);
-			int offset = indexPtr_->addIndexUnit(row.id);
-			obito::file::writeToFile(tablePtr_->getDataFileName(), row.toBinary(), valueRowSize_, offset);
-			return true;
-		}
-
 		bool PresistenceHandler::writeRow(Row row)
 		{
 			int offset = indexPtr_->addIndexUnit(row.id);

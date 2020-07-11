@@ -20,6 +20,15 @@
     <Filter Include="src\cache">
       <UniqueIdentifier>{e67481cd-ae7e-4b05-b0e2-e11697846634}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\transaction">
+      <UniqueIdentifier>{ee041a41-9611-44ee-b510-53f8b30367a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\transaction\mvcc">
+      <UniqueIdentifier>{f665ad7c-7135-4741-93a6-244a98298008}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\transaction\mvcc\undo">
+      <UniqueIdentifier>{b91cc76f-9318-406c-882c-b40b07c01e61}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitignore">
@@ -65,6 +74,15 @@
     </ClCompile>
     <ClCompile Include="..\src\cache\main_cache.cpp">
       <Filter>src\cache</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\transaction\transaction_mgr.cpp">
+      <Filter>src\transaction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\transaction\transaction_obj.cpp">
+      <Filter>src\transaction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\global.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +133,15 @@
     </ClInclude>
     <ClInclude Include="..\src\cache\main_cache.h">
       <Filter>src\cache</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\transaction\transaction_mgr.h">
+      <Filter>src\transaction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\transaction\transaction_obj.h">
+      <Filter>src\transaction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\global.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
