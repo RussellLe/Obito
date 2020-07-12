@@ -15,6 +15,7 @@ namespace obito {
 			int addIndexUnits(std::vector<int> idVec);
 			int getOffset(int id);
 			bool deleteIndexUnit(int id);
+			bool checkIdExist(int id);
 
 		protected:
 			std::map<int, int> indexContainer_;

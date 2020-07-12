@@ -23,3 +23,5 @@
 static const double MAIN_CACHE_HOT_RATE = 0.33;
 
 typedef unsigned int _value_type_int;
+
+#define ERROR_ROW_FLAG -1

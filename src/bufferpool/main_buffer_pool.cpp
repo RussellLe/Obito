@@ -47,6 +47,12 @@ namespace obito {
 			return dataPool.find(id)->second;
 		}
 
+		bool MainBufferPool::deleteFromBuffer(int id)
+		{
+			dataPool.erase(id);
+			return true;
+		}
+
 		std::vector<Row> MainBufferPool::getRowsFromBuffer()
 		{
 			std::vector<Row> rows;

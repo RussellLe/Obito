@@ -11,6 +11,9 @@
 #include "presistence.h"
 #include "cache/i_cache.h"
 #include "cache/main_cache.h"
+#include "mvcc/versionchain/main_version_chain.h"
+#include "transaction/transaction_mgr.h"
+#include "transaction/transaction_obj.h"
 
 using namespace std;
 
@@ -174,8 +177,89 @@ void commandTestScript()
 	}
 }
 
+void versionChainTest()
+{
+	obito::versionchain::MainVersionChain mvc;
+	std::shared_ptr<obito::table::Table> tablePtr = std::make_shared<obito::table::Table>("testbuffertable");
+	for (int i = 1; i < 10; i++)
+	{
+		obito::table::Value v1(std::make_shared<obito::datafield::FloatField>(6.6));
+		obito::table::Value v2(std::make_shared<obito::datafield::StringField>("HELLOWORLD"));
+		obito::table::Value v3(std::make_shared<obito::datafield::DoubleField>(33.33 + i));
+		std::vector<obito::table::Value> values;
+		values.push_back(v1);
+		values.push_back(v2);
+		values.push_back(v3);
+		Row row(tablePtr, 1, values);
+		row.setTransactionId(i);
+		mvc.addRow(row);
+		if (i == 9)
+		{
+			Row updaterow(tablePtr, 1, values);
+			updaterow.setTransactionId(2);
+			mvc.addRow(updaterow);
+		}
+	}
+	mvc.deleteRow(1, 8);
+	for (int i = 1; i < 10; i++)
+	{
+		Row row = mvc.readRow(1, i);
+		row.printRow();
+	}
+}
+
+void transactionTest()
+{
+	std::string tableName = "testtransactiontable";
+
+	obito::table::Column c1("oneColumn", obito::datafield::FloatFieldEnum);
+	obito::table::Column c2("twoColumn", obito::datafield::StringFieldEnum);
+	obito::table::Column c3("threeColumn", obito::datafield::DoubleFieldEnum);
+	std::vector<obito::table::Column> columns;
+	columns.push_back(c1);
+	columns.push_back(c2);
+	columns.push_back(c3);
+	std::shared_ptr<obito::table::Table> tablePtr = std::make_shared<obito::table::Table>(tableName);
+	std::shared_ptr<obito::presistence::PresistenceHandler> phptr=std::make_shared<obito::presistence::PresistenceHandler>(tablePtr, columns);
+
+	obito::global::GlobalModuleManager gmm;
+	gmm.tablePresistenceMap.addTablePresistencePair(tableName, phptr);
+	obito::transaction::TransactionManager trxmgr(gmm);
+	int trx1 = trxmgr.begin();
+	cout << trxmgr.checkTransactionExist(trx1) << endl;
+
+	obito::table::Value v1(std::make_shared<obito::datafield::FloatField>(6.6));
+	obito::table::Value v2(std::make_shared<obito::datafield::StringField>("HELLOWORLD"));
+	obito::table::Value v3(std::make_shared<obito::datafield::DoubleField>(33.33));
+	std::vector<obito::table::Value> values;
+	values.push_back(v1);
+	values.push_back(v2);
+	values.push_back(v3);
+	Row row(tablePtr, 1, values);
+	trxmgr.addRow(trx1, tableName,row);
+	trxmgr.readRow(trx1, tableName, 1);
+	trxmgr.commit(trx1);
+
+
+	obito::table::Value v4(std::make_shared<obito::datafield::FloatField>(7.7));
+	obito::table::Value v5(std::make_shared<obito::datafield::StringField>("HELLOWORLD"));
+	obito::table::Value v6(std::make_shared<obito::datafield::DoubleField>(22.33));
+	std::vector<obito::table::Value> values2;
+	values2.push_back(v4);
+	values2.push_back(v5);
+	values2.push_back(v6);
+	Row row2(tablePtr, 1, values2);
+	int trx2 = trxmgr.begin();
+	trxmgr.readRow(trx2, tableName, 1).printRow();
+	trxmgr.updateRow(trx2, tableName, row2);
+	trxmgr.readRow(trx2, tableName, 1).printRow();
+	trxmgr.rollback(trx2);
+	int trx3 = trxmgr.begin();
+	trxmgr.readRow(trx3, tableName, 1).printRow();
+}
+
 int main()
 {
-	readRowScript();
+	transactionTest();
 	return 0;
 }

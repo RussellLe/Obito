@@ -18,6 +18,7 @@ namespace obito {
 			virtual void updateFlushFlag() = 0;
 			virtual bool checkIdExist(int id) = 0;
 			virtual Row readFromBuffer(int id) = 0;
+			virtual bool deleteFromBuffer(int id) = 0;
 			virtual std::vector<Row> getRowsFromBuffer() = 0;
 			virtual bool cleanBuffer() = 0;
 			virtual bool getFlushStatus() = 0;

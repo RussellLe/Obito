@@ -23,11 +23,11 @@
     <Filter Include="src\transaction">
       <UniqueIdentifier>{ee041a41-9611-44ee-b510-53f8b30367a5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\transaction\mvcc">
-      <UniqueIdentifier>{f665ad7c-7135-4741-93a6-244a98298008}</UniqueIdentifier>
+    <Filter Include="src\mvcc">
+      <UniqueIdentifier>{1935dacc-d652-4c16-aa38-3e29ccec60c6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\transaction\mvcc\undo">
-      <UniqueIdentifier>{b91cc76f-9318-406c-882c-b40b07c01e61}</UniqueIdentifier>
+    <Filter Include="src\mvcc\versionchain">
+      <UniqueIdentifier>{3b973791-91b4-4d79-96d5-6df7a39bf245}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -83,6 +83,9 @@
     </ClCompile>
     <ClCompile Include="..\src\global.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mvcc\versionchain\main_version_chain.cpp">
+      <Filter>src\mvcc\versionchain</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -142,6 +145,12 @@
     </ClInclude>
     <ClInclude Include="..\src\global.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mvcc\versionchain\i_version_chain.h">
+      <Filter>src\mvcc\versionchain</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mvcc\versionchain\main_version_chain.h">
+      <Filter>src\mvcc\versionchain</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

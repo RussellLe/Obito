@@ -71,6 +71,15 @@ namespace obito {
 			return true;
 		}
 
+		bool MemoryRBTree::checkIdExist(int id)
+		{
+			if (indexContainer_.find(id) == indexContainer_.end())
+			{
+				return false;
+			}
+			return true;
+		}
+
 		bool MemoryRBTree::syncIndexToFile()
 		{
 			obito::file::deleteFile(indexFileName_);

@@ -15,6 +15,12 @@ namespace obito {
 			//
 		}
 
+		bool TablePresistenceMap::addTablePresistencePair(std::string tableName, std::shared_ptr<PresistenceHandler> presistencePtr)
+		{
+			tablePresistenceMap_[tableName] = presistencePtr;
+			return true;
+		}
+
 		bool TablePresistenceMap::checkTableExist(std::string tableName)
 		{
 			if (tablePresistenceMap_.find(tableName) == tablePresistenceMap_.end())

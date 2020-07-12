@@ -21,6 +21,8 @@ namespace obito {
 			bool deleteFromCache(int id);
 			bool updateCacheRow(Row row);
 
+			int size();
+
 		protected:
 			bool cacheEliminate_();
 			void updateIdLinkMiddle_();

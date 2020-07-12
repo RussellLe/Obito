@@ -16,6 +16,7 @@ namespace obito {
 			void updateFlushFlag();
 			bool checkIdExist(int id);
 			Row readFromBuffer(int id);
+			bool deleteFromBuffer(int id);
 
 			std::vector<Row> getRowsFromBuffer();
 			bool cleanBuffer();

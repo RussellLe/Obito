@@ -69,9 +69,12 @@ namespace obito {
 				bool rightSlidFlag = false;
 				for (auto iter = idLink.begin(); iter != idLink.end(); iter++)
 				{
-					if (*iter == *idLinkMiddle)
+					if (size() >= 4)
 					{
-						rightSlidFlag = true;
+						if (*iter == *idLinkMiddle)
+						{
+							rightSlidFlag = true;
+						}
 					}
 					if (*iter == id)
 					{
@@ -84,6 +87,10 @@ namespace obito {
 					rightSlidCount_++;
 				}
 
+				if (size() == 0)
+				{
+					idLinkMiddle = idLink.begin();
+				}
 
 				return true;
 			}
@@ -140,6 +147,11 @@ namespace obito {
 			}
 			updateIdLinkMiddle_();
 			return;
+		}
+
+		int MainCache::size()
+		{
+			return idLink.size();
 		}
 
 	}

@@ -32,6 +32,7 @@
     <ClCompile Include="..\src\global.cpp" />
     <ClCompile Include="..\src\index\memory_rbtree.cpp" />
     <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\mvcc\versionchain\main_version_chain.cpp" />
     <ClCompile Include="..\src\presistence.cpp" />
     <ClCompile Include="..\src\stdafx.cpp" />
     <ClCompile Include="..\src\table.cpp" />
@@ -53,6 +54,8 @@
     <ClInclude Include="..\src\global.h" />
     <ClInclude Include="..\src\index\i_index.h" />
     <ClInclude Include="..\src\index\memory_rbtree.h" />
+    <ClInclude Include="..\src\mvcc\versionchain\i_version_chain.h" />
+    <ClInclude Include="..\src\mvcc\versionchain\main_version_chain.h" />
     <ClInclude Include="..\src\presistence.h" />
     <ClInclude Include="..\src\stdafx.h" />
     <ClInclude Include="..\src\table.h" />

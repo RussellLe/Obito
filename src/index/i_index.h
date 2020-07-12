@@ -14,6 +14,7 @@ namespace obito {
 			virtual int addIndexUnits(std::vector<int> idVec) = 0;
 			virtual int getOffset(int id) = 0;
 			virtual bool deleteIndexUnit(int id) = 0;
+			virtual bool checkIdExist(int id) = 0;
 		};
 
 		class MemoryIndex : public IIndex
