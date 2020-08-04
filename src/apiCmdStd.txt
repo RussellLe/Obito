@@ -1,0 +1,14 @@
+执行表示形式：在API层通过exeObitoCmd接口输入的指令（command）即为执行表示形式，ObitoApi可以通过非常简单的解析将这种指令有效执行。
+
+
+规范：
+1.操作符（整句唯一，作为关键字）：add read update delete
+2.操作数：
+	add <tableName,id,<value1,value2,value3>>
+	read <tableName,id>
+	update <tableName,id,<value1,value2,value3>>
+	delete <tableName,id>
+
+
+特殊：
+create table <tableName,<<columnName_1,columnType>,<columnName_2,columnType>>>
