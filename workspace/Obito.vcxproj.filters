@@ -29,6 +29,12 @@
     <Filter Include="src\mvcc\versionchain">
       <UniqueIdentifier>{3b973791-91b4-4d79-96d5-6df7a39bf245}</UniqueIdentifier>
     </Filter>
+    <Filter Include="document">
+      <UniqueIdentifier>{e0b6a925-810f-48ab-be32-e802cd1dbe28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\parser">
+      <UniqueIdentifier>{d2aa3d53-8127-45cc-b104-cf0a399fe018}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitignore">
@@ -86,6 +92,12 @@
     </ClCompile>
     <ClCompile Include="..\src\mvcc\versionchain\main_version_chain.cpp">
       <Filter>src\mvcc\versionchain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\api.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\parser\api_cmd_parser.cpp">
+      <Filter>src\parser</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -152,5 +164,16 @@
     <ClInclude Include="..\src\mvcc\versionchain\main_version_chain.h">
       <Filter>src\mvcc\versionchain</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\api.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\parser\api_cmd_parser.h">
+      <Filter>src\parser</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\src\apiCmdStd.txt">
+      <Filter>document</Filter>
+    </Text>
   </ItemGroup>
 </Project>

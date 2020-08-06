@@ -124,6 +124,21 @@ namespace obito
             return indexName + "IndexFrags.dat";
         }
 
+        int turnStrToInteger(std::string theStr)
+        {
+            return std::stoi(theStr);
+        }
+
+        double turnStrToDouble(std::string theStr)
+        {
+            return std::stod(theStr);
+        }
+        
+        float turnStrToFloat(std::string theStr)
+        {
+            return std::stof(theStr);
+        }
+
         std::vector<std::string> splitStr(std::string originStr, char token)
         {
             std::vector<std::string> output;

@@ -129,6 +129,16 @@ namespace obito {
 			versionChainPtr_->addRow(versionRow);
 		}
 
+		std::vector<DataFieldEnum> PresistenceHandler::getColumnsDataFields()
+		{
+			std::vector<DataFieldEnum> output;
+			for (auto iter = tablePtr_->columns.begin(); iter < tablePtr_->columns.end(); iter++)
+			{
+				output.push_back(iter->valueType);
+			}
+			return output;
+		}
+
 		bool PresistenceHandler::deleteRow_(int id)
 		{
 			if (bufferPtr_->checkIdExist(id))

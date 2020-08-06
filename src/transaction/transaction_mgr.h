@@ -33,10 +33,9 @@ namespace obito {
 		public:
 			TransactionIsolationLevel isolationLevel;
 			int rightEndTransactionId;	//latest commit transaction id
-
-		protected:
 			GlobalModuleManager globalModuleManager_;
 
+		protected:
 			int transactionIdCursor_;
 			std::map<int, TransactionObject> transactionPool_;
 

@@ -17,6 +17,7 @@ typedef obito::index::IIndex IIndex;
 typedef obito::cache::ICache ICache;
 typedef obito::buffer::IBufferPool IBufferPool;
 typedef obito::versionchain::IVersionChain IVersionChain;
+typedef obito::datafield::DataFieldEnum DataFieldEnum;
 
 namespace obito {
 	namespace presistence {
@@ -35,8 +36,12 @@ namespace obito {
 			bool updateRow(Row row);
 			bool rollback(int transactionId, std::vector<int> updateIdVec);
 
-		protected:
+			std::vector<DataFieldEnum> getColumnsDataFields();
+
+		public:
 			std::shared_ptr<Table> tablePtr_;
+
+		protected:
 			std::shared_ptr<IIndex> indexPtr_;
 			std::shared_ptr<ICache> cachePtr_;
 			std::shared_ptr<IBufferPool> bufferPtr_;

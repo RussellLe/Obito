@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -22,6 +22,7 @@
     <None Include="..\.gitignore" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\api.cpp" />
     <ClCompile Include="..\src\bufferpool\main_buffer_pool.cpp" />
     <ClCompile Include="..\src\cache\main_cache.cpp" />
     <ClCompile Include="..\src\datafield\double_field.cpp" />
@@ -33,6 +34,7 @@
     <ClCompile Include="..\src\index\memory_rbtree.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\mvcc\versionchain\main_version_chain.cpp" />
+    <ClCompile Include="..\src\parser\api_cmd_parser.cpp" />
     <ClCompile Include="..\src\presistence.cpp" />
     <ClCompile Include="..\src\stdafx.cpp" />
     <ClCompile Include="..\src\table.cpp" />
@@ -41,6 +43,7 @@
     <ClCompile Include="..\src\util.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\src\api.h" />
     <ClInclude Include="..\src\bufferpool\i_buffer_pool.h" />
     <ClInclude Include="..\src\bufferpool\main_buffer_pool.h" />
     <ClInclude Include="..\src\cache\i_cache.h" />
@@ -56,12 +59,16 @@
     <ClInclude Include="..\src\index\memory_rbtree.h" />
     <ClInclude Include="..\src\mvcc\versionchain\i_version_chain.h" />
     <ClInclude Include="..\src\mvcc\versionchain\main_version_chain.h" />
+    <ClInclude Include="..\src\parser\api_cmd_parser.h" />
     <ClInclude Include="..\src\presistence.h" />
     <ClInclude Include="..\src\stdafx.h" />
     <ClInclude Include="..\src\table.h" />
     <ClInclude Include="..\src\transaction\transaction_mgr.h" />
     <ClInclude Include="..\src\transaction\transaction_obj.h" />
     <ClInclude Include="..\src\util.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\src\apiCmdStd.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

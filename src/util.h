@@ -53,6 +53,12 @@ namespace obito
 
         std::vector<std::string> splitStr(std::string originStr, char token);
 
+        int turnStrToInteger(std::string theStr);
+
+        double turnStrToDouble(std::string theStr);
+
+        float turnStrToFloat(std::string theStr);
+
         template <typename T> T* initObjectByStr(char* initStr)
         {
             T* outputPtr = new T();
