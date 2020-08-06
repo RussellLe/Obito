@@ -64,15 +64,68 @@ namespace obito {
 				return output;
 			}
 
-			std::string tableName = words[1];
-			int id = obito::common::turnStrToInteger(words[2]);
+			output.tableName = words[1];
+			output.id = obito::common::turnStrToInteger(words[2]);
 			output.valuesOnStr = obito::common::splitStr(words[3], VALUE_SPLIT_SYMBOL);
 
 			output.isOutput = true;
 			return output;
 		}
 
+		ReadCmdParseOutput parseReadCmd(std::string command)
+		{
+			ReadCmdParseOutput output;
+			output.isOutput = false;
 
+			std::vector<std::string> words = obito::common::splitStr(command, WORD_SPLIT_SYMBOL);
+			if (words[0] != READ_KEYWORD)
+			{
+				return output;
+			}
+
+			output.tableName = words[1];
+			output.id = obito::common::turnStrToInteger(words[2]);
+
+			output.isOutput = true;
+			return output;
+		}
+
+		UpdateCmdParseOutput parseUpdateCmd(std::string command)
+		{
+			UpdateCmdParseOutput output;
+			output.isOutput = false;
+			
+			std::vector<std::string> words = obito::common::splitStr(command, WORD_SPLIT_SYMBOL);
+			if (words[0] != UPDATE_KEYWORD)
+			{
+				return output;
+			}
+
+			output.tableName = words[1];
+			output.id = obito::common::turnStrToInteger(words[2]);
+			output.valuesOnStr = obito::common::splitStr(words[3], VALUE_SPLIT_SYMBOL);
+			
+			output.isOutput = true;
+			return output;
+		}
+
+		DeleteCmdParseOutput parseDeleteCmd(std::string command)
+		{
+			DeleteCmdParseOutput output;
+			output.isOutput = false;
+
+			std::vector<std::string> words = obito::common::splitStr(command, WORD_SPLIT_SYMBOL);
+			if (words[0] != DELETE_KEYWORD)
+			{
+				return output;
+			}
+
+			output.tableName = words[1];
+			output.id = obito::common::turnStrToInteger(words[2]);
+			
+			output.isOutput = true;
+			return output;
+		}
 
 	}
 }

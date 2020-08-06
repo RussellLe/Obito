@@ -30,9 +30,40 @@ namespace obito {
 			bool isOutput;
 		};
 
+		class ReadCmdParseOutput
+		{
+		public:
+			int id;
+			std::string tableName;
+			bool isOutput;
+		};
+
+		class UpdateCmdParseOutput
+		{
+		public:
+			int id;
+			std::string tableName;
+			std::vector<std::string> valuesOnStr;
+			bool isOutput;
+		};
+
+		class DeleteCmdParseOutput
+		{
+		public:
+			int id;
+			std::string tableName;
+			bool isOutput;
+		};
+
 		CreateTableParseOutput parseCreateTable(std::string command);
 
 		AddCmdParseOutput parseAddCmd(std::string command);
+
+		ReadCmdParseOutput parseReadCmd(std::string command);
+
+		UpdateCmdParseOutput parseUpdateCmd(std::string command);
+
+		DeleteCmdParseOutput parseDeleteCmd(std::string command);
 
 	}
 }

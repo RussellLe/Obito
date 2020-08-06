@@ -87,5 +87,67 @@ namespace obito {
 			return trxMgr_.addRow(transactionId, output.tableName, row);
 		}
 
+
+		Row ObitoApi::readByCmd(std::string command, int transactionId)
+		{
+			ReadCmdParseOutput output = obito::parser::parseReadCmd(command);
+			Row row = trxMgr_.readRow(transactionId, output.tableName, output.id);
+			return row;
+		}
+
+		bool ObitoApi::updateByCmd(std::string command, int transactionId)
+		{
+			UpdateCmdParseOutput output = obito::parser::parseUpdateCmd(command);
+
+			auto presistencePtr = trxMgr_.globalModuleManager_.tablePresistenceMap.getPresistence(output.tableName);
+			std::vector<DataFieldEnum> dataFieldVec = presistencePtr->getColumnsDataFields();
+
+			if (output.valuesOnStr.size() != dataFieldVec.size())
+			{
+				return false;
+			}
+
+			std::vector<Value> values;
+			for (int i = 0; i < output.valuesOnStr.size(); i++)
+			{
+				switch (dataFieldVec[0])
+				{
+				case DataFieldEnum::IntegerFieldEnum: {
+					int integerValue = obito::common::turnStrToInteger(output.valuesOnStr[i]);
+					values.push_back(*(std::make_shared<Value>(std::make_shared<obito::datafield::IntegerField>(integerValue))));
+					break;
+				}
+				case DataFieldEnum::DoubleFieldEnum: {
+					double doubleValue = obito::common::turnStrToDouble(output.valuesOnStr[i]);
+					values.push_back(*(std::make_shared<Value>(std::make_shared<obito::datafield::DoubleField>(doubleValue))));
+					break;
+				}
+				case DataFieldEnum::FloatFieldEnum: {
+					float floatValue = obito::common::turnStrToFloat(output.valuesOnStr[i]);
+					values.push_back(*(std::make_shared<Value>(std::make_shared<obito::datafield::FloatField>(floatValue))));
+					break;
+				}
+				case DataFieldEnum::StringFieldEnum: {
+					std::string stringValue = output.valuesOnStr[i];
+					values.push_back(*(std::make_shared<Value>(std::make_shared<obito::datafield::StringField>(stringValue))));
+					break;
+				}
+				default:
+					return false;
+				}
+			}
+
+			Row row(presistencePtr->tablePtr_, output.id, values);
+
+			trxMgr_.updateRow(transactionId, output.tableName, row);
+			return true;
+		}
+
+		bool ObitoApi::deleteByCmd(std::string command, int transactionId)
+		{
+			DeleteCmdParseOutput output = obito::parser::parseDeleteCmd(command);
+			return trxMgr_.deleteRow(transactionId, output.tableName, output.id);
+		}
+
 	}
 }
