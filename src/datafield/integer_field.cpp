@@ -37,6 +37,11 @@ namespace obito {
 			std::cout << value;
 		}
 
+		std::string IntegerField::getValueByStr()
+		{
+			return std::to_string(value);
+		}
+
 		char* IntegerField::toBinary()
 		{
 			return reinterpret_cast<char*>(&value);

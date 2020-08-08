@@ -25,6 +25,7 @@ namespace obito {
 			virtual size_t getValueSize() = 0;
 			virtual void printValue() = 0;
 			virtual char* toBinary() = 0;
+			virtual std::string getValueByStr() = 0;
 
 		};
 

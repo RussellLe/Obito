@@ -43,6 +43,11 @@ namespace obito {
 			valuePtr->printValue();
 		}
 
+		std::string Value::getValueByStr()
+		{
+			return valuePtr->getValueByStr();
+		}
+
 		Row::Row(std::shared_ptr<Table> belongTable, int theId, std::vector<Value> theValues)
 		{
 			belongTablePtr = belongTable;
@@ -92,6 +97,18 @@ namespace obito {
 				std::cout << ' ';
 			}
 			std::cout << std::endl;
+		}
+
+		std::string Row::getRowByStr()
+		{
+			std::string output = "";
+			output = output + std::to_string(id) + ' ';
+			output = output + std::to_string(transactionId) + ' ';
+			for (auto iter = values.begin(); iter < values.end(); iter++)
+			{
+				output = output + iter->getValueByStr() + ' ';
+			}
+			return output;
 		}
 
 		char* Row::toBinary()

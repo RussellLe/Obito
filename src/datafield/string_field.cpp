@@ -42,5 +42,10 @@ namespace obito {
 			std::cout << value;
 		}
 
+		std::string StringField::getValueByStr()
+		{
+			return value;
+		}
+
 	}
 }

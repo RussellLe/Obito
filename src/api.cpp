@@ -17,6 +17,44 @@ namespace obito {
 
 		std::string ObitoApi::exeObitoCmd(std::string command, int transactionId)
 		{
+			std::vector<std::string> words = obito::common::splitStr(command, VALUE_SPLIT_SYMBOL);
+			bool flag = false;
+
+			if (words[0] == CREATE_TABLE_KEYWORD)
+			{
+				flag = createTableByCmd(command);
+			}
+			else if (words[0] == ADD_KEYWORD)
+			{
+				flag = addByCmd(command, transactionId);
+			}
+			else if (words[0] == UPDATE_KEYWORD)
+			{
+				flag = updateByCmd(command, transactionId);
+			}
+			else if (words[0] == DELETE_KEYWORD)
+			{
+				flag = deleteByCmd(command, transactionId);
+			}
+			else if (words[0] == READ_KEYWORD)
+			{
+				Row row = readByCmd(command, transactionId);
+				if (row.id != ERROR_ROW_FLAG)
+				{
+					flag = true;
+					return row.getRowByStr();
+				}
+			}
+			else
+			{
+				return "error command";
+			}
+			
+			if (!flag)
+			{
+				return "failed";
+			}
+
 			return "success";
 		}
 

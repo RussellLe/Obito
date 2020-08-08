@@ -21,6 +21,7 @@ namespace obito {
 			Value(DataFieldEnum dataFieldEnum, char* initStr);
 			Value(std::shared_ptr<IDataField> theValuePtr);
 			void printValue();
+			std::string getValueByStr();
 		};
 
 		class Column
@@ -81,6 +82,7 @@ namespace obito {
 			void printRow();
 			char* toBinary();
 			size_t getValueRowSize();
+			std::string getRowByStr();
 		};
 
 	}

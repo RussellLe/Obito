@@ -21,6 +21,7 @@ namespace obito {
 			size_t getValueSize();
 			void printValue();
 			char* toBinary();		//only value to binary
+			std::string getValueByStr();
 
 		};
 

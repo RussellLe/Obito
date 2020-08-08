@@ -41,5 +41,10 @@ namespace obito {
 			return reinterpret_cast<char*>(&value);
 		}
 
+		std::string FloatField::getValueByStr()
+		{
+			return std::to_string(value);
+		}
+
 	}
 }

@@ -41,6 +41,11 @@ namespace obito {
 			return reinterpret_cast<char*>(&value);
 		}
 
+		std::string DoubleField::getValueByStr()
+		{
+			return std::to_string(value);
+		}
+
 
 	}
 }
