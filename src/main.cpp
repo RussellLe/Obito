@@ -14,6 +14,7 @@
 #include "mvcc/versionchain/main_version_chain.h"
 #include "transaction/transaction_mgr.h"
 #include "transaction/transaction_obj.h"
+#include "api.h"
 
 using namespace std;
 
@@ -256,6 +257,19 @@ void transactionTest()
 	trxmgr.rollback(trx2);
 	int trx3 = trxmgr.begin();
 	trxmgr.readRow(trx3, tableName, 1).printRow();
+}
+
+void testByCmdApi()
+{
+	obito::global::GlobalModuleManager gmm;
+	obito::transaction::TransactionManager trxmgr(gmm);
+	obito::api::ObitoApi theApi(gmm);
+	
+	std::string command;
+	while (cin >> command)
+	{
+		theApi.exeObitoCmd(command, 1);
+	}
 }
 
 int main()

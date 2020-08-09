@@ -44,7 +44,7 @@ namespace obito {
 					flag = true;
 					return row.getRowByStr();
 				}
-			}
+			}  
 			else
 			{
 				return "error command";

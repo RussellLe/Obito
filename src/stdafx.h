@@ -31,6 +31,9 @@ typedef unsigned int _value_type_int;
 #define READ_KEYWORD "read"
 #define UPDATE_KEYWORD "update"
 #define DELETE_KEYWORD "delete"
+#define BEGIN_KEYWORD "begin"
+#define COMMIT_KEYWORD "commit"
+#define ROLLBACK_KEYWORD "rollback"
 
 #define INTEGER_FIELD_KEYWORD "integer"
 #define DOUBLE_FIELD_KEYWORD "double"
