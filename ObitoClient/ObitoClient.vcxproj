@@ -147,7 +147,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="client_context.cpp" />
     <ClCompile Include="ObitoClient.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="client_context.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

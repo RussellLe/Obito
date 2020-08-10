@@ -36,6 +36,7 @@
     <ClCompile Include="..\src\mvcc\versionchain\main_version_chain.cpp" />
     <ClCompile Include="..\src\parser\api_cmd_parser.cpp" />
     <ClCompile Include="..\src\presistence.cpp" />
+    <ClCompile Include="..\src\server.cpp" />
     <ClCompile Include="..\src\stdafx.cpp" />
     <ClCompile Include="..\src\table.cpp" />
     <ClCompile Include="..\src\transaction\transaction_mgr.cpp" />
@@ -61,6 +62,7 @@
     <ClInclude Include="..\src\mvcc\versionchain\main_version_chain.h" />
     <ClInclude Include="..\src\parser\api_cmd_parser.h" />
     <ClInclude Include="..\src\presistence.h" />
+    <ClInclude Include="..\src\server.h" />
     <ClInclude Include="..\src\stdafx.h" />
     <ClInclude Include="..\src\table.h" />
     <ClInclude Include="..\src\transaction\transaction_mgr.h" />

@@ -18,5 +18,13 @@
     <ClCompile Include="ObitoClient.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="client_context.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="client_context.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

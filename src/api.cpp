@@ -44,18 +44,31 @@ namespace obito {
 					flag = true;
 					return row.getRowByStr();
 				}
-			}  
+			}
+			else if (words[0] == BEGIN_KEYWORD)
+			{
+				int trxId = trxMgr_.begin();
+				return std::to_string(trxId);
+			}
+			else if (words[0] == COMMIT_KEYWORD)
+			{
+				trxMgr_.commit(transactionId);
+			}
+			else if (words[0] == ROLLBACK_KEYWORD)
+			{
+				trxMgr_.rollback(transactionId);
+			}
 			else
 			{
-				return "error command";
+				return "Error Command";
 			}
 			
 			if (!flag)
 			{
-				return "failed";
+				return "Failed";
 			}
 
-			return "success";
+			return "Success";
 		}
 
 		bool ObitoApi::createTableByCmd(std::string command)

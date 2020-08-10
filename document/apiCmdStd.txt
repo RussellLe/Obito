@@ -12,3 +12,6 @@
 
 ÌØÊâ£º
 createtable tableName columnName_1,columnType columnName_2,columnType
+begin
+commit
+rollback

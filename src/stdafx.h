@@ -1,4 +1,6 @@
 #pragma once
+#define _WINSOCK_DEPRECATED_NO_WARNINGS
+#define WIN32_LEAN_AND_MEAN
 
 #include <iostream>
 #include <fstream>
@@ -8,6 +10,8 @@
 #include <map>
 #include <list>
 #include <iterator>
+#include <WinSock2.h>
+#pragma comment(lib, "ws2_32.lib")  
 
 #define _CRT_SECURE_NO_WARNINGS
 #pragma  warning (disable:4996) 
@@ -25,6 +29,7 @@ static const double MAIN_CACHE_HOT_RATE = 0.33;
 typedef unsigned int _value_type_int;
 
 #define ERROR_ROW_FLAG -1
+#define NONE_TRANSACTION_ID 0
 
 #define CREATE_TABLE_KEYWORD "createtable"
 #define ADD_KEYWORD "add"

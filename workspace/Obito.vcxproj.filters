@@ -99,6 +99,9 @@
     <ClCompile Include="..\src\parser\api_cmd_parser.cpp">
       <Filter>src\parser</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\server.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\stdafx.h">
@@ -169,6 +172,9 @@
     </ClInclude>
     <ClInclude Include="..\src\parser\api_cmd_parser.h">
       <Filter>src\parser</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\server.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
