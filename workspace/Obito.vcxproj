@@ -70,7 +70,7 @@
     <ClInclude Include="..\src\util.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\src\apiCmdStd.txt" />
+    <Text Include="..\document\apiCmdStd.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

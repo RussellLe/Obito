@@ -178,7 +178,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\src\apiCmdStd.txt">
+    <Text Include="..\document\apiCmdStd.txt">
       <Filter>document</Filter>
     </Text>
   </ItemGroup>

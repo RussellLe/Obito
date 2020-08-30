@@ -19,6 +19,8 @@ namespace obito {
 			std::string tableName;
 			std::map<std::string, DataFieldEnum> columnMap;
 			bool isOutput;
+			
+			void printInfo();
 		};
 
 		class AddCmdParseOutput

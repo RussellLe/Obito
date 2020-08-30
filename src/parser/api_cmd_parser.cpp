@@ -20,7 +20,7 @@ namespace obito {
 
 			for (int i = 2; i < words.size(); i++)
 			{
-				std::vector<std::string> columnPair = obito::common::splitStr(command, VALUE_SPLIT_SYMBOL);
+				std::vector<std::string> columnPair = obito::common::splitStr(words[i], VALUE_SPLIT_SYMBOL);
 				std::string columnName = columnPair[0];
 				DataFieldEnum dataFieldEnum;
 
@@ -125,6 +125,17 @@ namespace obito {
 			
 			output.isOutput = true;
 			return output;
+		}
+
+		void CreateTableParseOutput::printInfo()
+		{
+			std::cout << "========Create Table Parse Output Info=======" << std::endl;
+			std::cout << tableName << std::endl;
+			for (auto iter = columnMap.begin(); iter != columnMap.end(); iter++)
+			{
+				std::cout << iter->first << std::endl;
+			}
+			std::cout << "=============================================" << std::endl;
 		}
 
 	}

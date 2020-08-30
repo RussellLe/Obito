@@ -17,7 +17,7 @@ namespace obito {
 
 		std::string ObitoApi::exeObitoCmd(std::string command, int transactionId)
 		{
-			std::vector<std::string> words = obito::common::splitStr(command, VALUE_SPLIT_SYMBOL);
+			std::vector<std::string> words = obito::common::splitStr(command, WORD_SPLIT_SYMBOL);
 			bool flag = false;
 
 			if (words[0] == CREATE_TABLE_KEYWORD)
