@@ -14,7 +14,7 @@ namespace obito {
 
 		TransactionManager::~TransactionManager()
 		{
-			//
+			std::cout << "delete trxmgr" << std::endl;
 		}
 
 		bool TransactionManager::setIsolationLevel(TransactionIsolationLevel theIsolationLevel)

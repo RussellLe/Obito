@@ -17,6 +17,7 @@ namespace obito {
 
 		bool MainVersionChain::addRow(Row row)
 		{
+			std::cout << "add " << row.id << " to version chain" << std::endl;
 			if (versionChainMap_.find(row.id) == versionChainMap_.end())
 			{
 				auto histroyDataList = std::make_shared<std::list<std::pair<int, Row>>>();

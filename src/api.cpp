@@ -12,7 +12,7 @@ namespace obito {
 
 		ObitoApi::~ObitoApi()
 		{
-			//
+			std::cout << "delete api" << std::endl;
 		}
 
 		std::string ObitoApi::exeObitoCmd(std::string command, int transactionId)
@@ -107,7 +107,7 @@ namespace obito {
 			std::vector<Value> values;
 			for (int i = 0; i < output.valuesOnStr.size(); i++)
 			{
-				switch (dataFieldVec[0])
+				switch (dataFieldVec[i])
 				{
 				case DataFieldEnum::IntegerFieldEnum: {
 					int integerValue = obito::common::turnStrToInteger(output.valuesOnStr[i]);

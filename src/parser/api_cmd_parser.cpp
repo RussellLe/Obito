@@ -138,5 +138,17 @@ namespace obito {
 			std::cout << "=============================================" << std::endl;
 		}
 
+		void AddCmdParseOutput::printInfo()
+		{
+			std::cout << "========Add Cmd Parse Output Info=======" << std::endl;
+			std::cout << id << std::endl;
+			std::cout << tableName << std::endl;
+			for (auto iter = valuesOnStr.begin(); iter < valuesOnStr.end(); iter++)
+			{
+				std::cout << *iter << std::endl;
+			}
+			std::cout << "=============================================" << std::endl;
+		}
+
 	}
 }

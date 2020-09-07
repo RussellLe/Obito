@@ -30,6 +30,8 @@ namespace obito {
 			std::string tableName;
 			std::vector<std::string> valuesOnStr;
 			bool isOutput;
+
+			void printInfo();
 		};
 
 		class ReadCmdParseOutput

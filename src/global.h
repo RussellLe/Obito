@@ -17,14 +17,24 @@ namespace obito {
 			bool checkTableExist(std::string tableName);
 			std::shared_ptr<PresistenceHandler> getPresistence(std::string tableName);
 
+
+			bool flushPresistences();
+			
+
 		protected:
 			std::map<std::string, std::shared_ptr<PresistenceHandler>> tablePresistenceMap_;
+			std::string tableNameFile;
+
+		protected:
+			void syncTableNameToFile(std::vector<std::string> tableNames);
+			void loadTableNameFromFile();
 
 		};
 
 		class GlobalModuleManager
 		{
 		public:
+			~GlobalModuleManager();
 			TablePresistenceMap tablePresistenceMap;
 		};
 

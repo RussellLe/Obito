@@ -32,6 +32,7 @@ namespace obito {
 			Column() {}
 			Column(char* initStr);
 			Column(std::string theColumnName, DataFieldEnum theValueType);
+			~Column();
 			char* toBinary();
 			size_t getValueSize();
 		};
@@ -44,6 +45,7 @@ namespace obito {
 			Table() {}
 			Table(std::string theTableName);
 			Table(std::string theTableName, std::vector<Column> theColumns);
+			~Table();
 
 		public:
 			void addColumn(Column theColumn);

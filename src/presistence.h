@@ -37,6 +37,7 @@ namespace obito {
 			bool rollback(int transactionId, std::vector<int> updateIdVec);
 
 			std::vector<DataFieldEnum> getColumnsDataFields();
+			bool flushBuffer_();
 
 		public:
 			std::shared_ptr<Table> tablePtr_;
@@ -49,7 +50,6 @@ namespace obito {
 			size_t valueRowSize_;
 
 		protected:
-			bool flushBuffer_();
 			bool addRow_(Row row);
 			bool deleteRow_(int id);
 

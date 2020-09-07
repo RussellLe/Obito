@@ -14,6 +14,7 @@ namespace obito {
 
 		bool MainBufferPool::addToBuffer(Row row)
 		{
+			std::cout << "add " << row.id << " to buffer pool" << std::endl;
 			dataPool.insert(std::pair<int, Row>(row.id, row));
 			updateFlushFlag();
 			return true;

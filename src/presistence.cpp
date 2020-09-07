@@ -25,7 +25,7 @@ namespace obito {
 
 		PresistenceHandler::~PresistenceHandler()
 		{
-			flushBuffer_();
+			//
 		}
 
 		bool PresistenceHandler::addRow(Row row)

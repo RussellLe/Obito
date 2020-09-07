@@ -341,10 +341,16 @@ int socketServerScript()
 	WSACleanup();
 }
 
-int main()
+void startServer()
 {
 	obito::global::GlobalModuleManager gmm;
 	obito::server::ObitoServer server(8888, gmm);
+	server.startCommandHandlers();
+}
+
+int main()
+{
+	obito::server::ObitoServer server(8888, *(new obito::global::GlobalModuleManager));
 	server.startCommandHandlers();
 	return 0;
 }

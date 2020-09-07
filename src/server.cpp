@@ -50,6 +50,11 @@ namespace obito {
 				std::string command = revData;
 				std::string output = "Success";
 
+				if (command == "killserver")
+				{
+					break;
+				}
+
 				std::string keyword = obito::common::splitStr(command, VALUE_SPLIT_SYMBOL)[0];
 				if (keyword == BEGIN_KEYWORD)
 				{

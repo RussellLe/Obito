@@ -153,6 +153,11 @@ namespace obito {
 			return reinterpret_cast<char*>(this);
 		}
 
+		Column::~Column()
+		{
+			//
+		}
+
 		size_t Column::getValueSize()
 		{
 			return obito::datafield::getValueSizeByDFE(valueType);
@@ -182,6 +187,7 @@ namespace obito {
 			columnsFileName_ = obito::common::generateColumnsFileName(tableName);
 
 			checkTableFile_();
+			loadColumnsFromFile();
 		}
 
 		Table::Table(std::string theTableName, std::vector<Column> theColumns)
@@ -191,7 +197,12 @@ namespace obito {
 			dataFileName_ = obito::common::generateTableDataFileName(tableName);
 			columnsFileName_ = obito::common::generateColumnsFileName(tableName);
 
-			checkTableFile_();
+			columns = theColumns;
+		}
+
+		Table::~Table()
+		{
+			syncColumnsToFile();
 		}
 
 		void Table::addColumn(Column theColumn)
@@ -216,11 +227,11 @@ namespace obito {
 			int length = tmp.length();
 
 			char* initColumnsStr = obito::file::turnStdStringToBinary(tmp);
-			
+
 			for (int offsetCursor = 0; offsetCursor < length; offsetCursor += sizeof(Column))
 			{
-				Column columnObj(initColumnsStr + offsetCursor);
-				columns.push_back(columnObj);
+				auto columnPtr=new Column(initColumnsStr + offsetCursor);
+				columns.push_back(*columnPtr);
 			}
 		}
 

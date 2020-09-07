@@ -15,3 +15,17 @@ createtable tableName columnName_1,columnType columnName_2,columnType
 begin
 commit
 rollback
+
+
+
+test cmd:
+createtable cmdtb f1,integer f2,string
+add cmdtb 1 99,helloworld
+add cmdtb 3 999,fuckingdamn
+
+
+test tablenamesfile:
+createtable cmdtb f1,integer f2,string
+createtable cmdtb2 f1,integer f2,string
+add cmdtb 1 99,helloworld
+add cmdtb2 1 99,helloworld
