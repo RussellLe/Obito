@@ -38,6 +38,11 @@ namespace obito {
 		protected:
 			int transactionIdCursor_;
 			std::map<int, TransactionObject> transactionPool_;
+			std::string trxIdFileName_;
+
+		protected:
+			void syncTrxIdCursor();
+			void loadTrxIdCursor();
 
 		};
 

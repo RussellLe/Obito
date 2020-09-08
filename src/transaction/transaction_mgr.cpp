@@ -7,14 +7,15 @@ namespace obito {
 		TransactionManager::TransactionManager(const GlobalModuleManager& globalModuleManager)
 		{
 			globalModuleManager_ = globalModuleManager;
-			transactionIdCursor_ = 1;
 			isolationLevel = MEDIUM_ISOLATION_LEVEL;
-			rightEndTransactionId = 0;
+
+			trxIdFileName_ = "trxId.dat";
+			loadTrxIdCursor();
 		}
 
 		TransactionManager::~TransactionManager()
 		{
-			std::cout << "delete trxmgr" << std::endl;
+			syncTrxIdCursor();
 		}
 
 		bool TransactionManager::setIsolationLevel(TransactionIsolationLevel theIsolationLevel)
@@ -103,6 +104,24 @@ namespace obito {
 				return false;
 			}
 			return true;
+		}
+
+		void TransactionManager::syncTrxIdCursor()
+		{
+			obito::file::deleteFile(trxIdFileName_);
+			obito::file::createFile(trxIdFileName_);
+			obito::file::writeStringToFile(trxIdFileName_, std::to_string(transactionIdCursor_) 
+				+ VALUE_SPLIT_SYMBOL + std::to_string(rightEndTransactionId), 0);
+		}
+
+		void TransactionManager::loadTrxIdCursor()
+		{
+			std::string originStr = obito::file::readAllStringFromFile(trxIdFileName_); 
+				std::vector<std::string> output = obito::common::splitStr(originStr, VALUE_SPLIT_SYMBOL);
+			transactionIdCursor_ = std::stoi(output[0]);
+			rightEndTransactionId = std::stoi(output[1]);
+			std::cout << "load trxidcursor:" << transactionIdCursor_ << std::endl;
+			std::cout << "load rightend:" << rightEndTransactionId << std::endl;
 		}
 
 	}

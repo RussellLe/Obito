@@ -6,10 +6,10 @@ namespace obito {
 	namespace transaction {
 
 		TransactionObject::TransactionObject(int theTransactionId, int theLeftEndTransactionId, TransactionIsolationLevel isolationLevel,
-			const TablePresistenceMap& tablePresistenceMap)
+			TablePresistenceMap& tablePresistenceMap)
+			: tablePresistenceMap_(tablePresistenceMap)
 		{
 			transactionId = theTransactionId;
-			tablePresistenceMap_ = tablePresistenceMap;
 			leftEndTransactionId = theLeftEndTransactionId;
 			isolationLevel_ = isolationLevel;
 		}

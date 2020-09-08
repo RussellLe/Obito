@@ -25,7 +25,7 @@ namespace obito {
 			
 		public:
 			TransactionObject(int theTransactionId, int theLeftEndTransactionId, TransactionIsolationLevel isolationLevel,
-				const TablePresistenceMap& tablePresistenceMap);
+				TablePresistenceMap& tablePresistenceMap);
 			~TransactionObject();
 			bool addRow(std::string tableName, Row row);
 			Row readRow(std::string tableName, int id, int rightEndTransactionId);
@@ -38,7 +38,7 @@ namespace obito {
 			std::map<std::string,std::vector<int>> updateIdMap_;
 
 		protected:
-			TablePresistenceMap tablePresistenceMap_;
+			TablePresistenceMap& tablePresistenceMap_;
 			TransactionIsolationLevel isolationLevel_;
 
 		};
